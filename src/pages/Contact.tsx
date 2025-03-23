@@ -1,4 +1,3 @@
-
 import React from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -68,7 +67,7 @@ const Contact = () => {
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
                 {contactInfo.map((item, index) => (
-                  <Card key={index} className="hover-card">
+                  <Card key={index} className="shadow-sm hover:shadow-md transition-shadow">
                     <CardContent className="p-6 flex">
                       <div className="mr-4">
                         <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-accent">
@@ -86,7 +85,7 @@ const Contact = () => {
                 ))}
               </div>
               
-              <Card className="bg-gradient-to-r from-accent to-blue-600 text-white overflow-hidden">
+              <Card className="bg-gradient-to-r from-accent to-blue-600 text-white overflow-hidden shadow-md">
                 <CardContent className="p-6 flex items-center">
                   <div className="mr-6">
                     <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center">
@@ -107,9 +106,8 @@ const Contact = () => {
             </div>
             
             <div>
-              <Card className="border-none shadow-lg">
+              <Card className="border border-gray-200 shadow-md">
                 <CardContent className="p-8">
-                  <h3 className="text-2xl font-bold mb-6">Send Us a Message</h3>
                   <ContactForm />
                 </CardContent>
               </Card>

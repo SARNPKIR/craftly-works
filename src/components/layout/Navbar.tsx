@@ -21,6 +21,18 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Disable body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileNavOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileNavOpen]);
+
   const navLinks = [
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
@@ -62,7 +74,7 @@ const Navbar = () => {
       <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
         <Link 
           to="/" 
-          className="text-2xl font-bold tracking-tight transition-all duration-300 z-50"
+          className="text-2xl font-bold tracking-tight transition-all duration-300 z-10"
         >
           <span className={cn(
             "font-bold transition-colors",
@@ -114,7 +126,7 @@ const Navbar = () => {
             aria-label={mobileNavOpen ? 'Close menu' : 'Open menu'}
           >
             {mobileNavOpen ? (
-              <X size={24} className={getTextColor()} />
+              <X size={24} className="text-foreground" />
             ) : (
               <Menu size={24} className={getTextColor()} />
             )}
@@ -124,28 +136,39 @@ const Navbar = () => {
         {/* Mobile Navigation - Fixed positioning to avoid overlap */}
         <div
           className={cn(
-            'fixed inset-0 bg-background z-40 transition-all duration-300 ease-in-out md:hidden flex flex-col',
-            mobileNavOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+            'fixed inset-0 bg-background z-40 transition-all duration-300 ease-in-out md:hidden',
+            mobileNavOpen 
+              ? 'opacity-100 visible translate-y-0' 
+              : 'opacity-0 invisible translate-y-[-10px] pointer-events-none'
           )}
         >
-          <div className="flex flex-col items-center justify-center h-full space-y-6 p-6 pt-24">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                to={link.href}
-                className="text-xl font-medium text-foreground hover:text-accent transition-colors"
-                onClick={() => setMobileNavOpen(false)}
-              >
-                {link.name}
-              </Link>
-            ))}
-            <Link
-              to="/contact"
-              className="mt-4 inline-flex items-center px-6 py-3 rounded-full text-base font-medium bg-accent text-white hover:bg-accent/90 transition-colors"
-              onClick={() => setMobileNavOpen(false)}
-            >
-              Get Free Consultation
-            </Link>
+          <div className="flex flex-col items-center pt-20 pb-8 h-full overflow-y-auto">
+            <div className="w-full max-w-md mx-auto px-6 py-8 space-y-6">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  to={link.href}
+                  className={cn(
+                    "block text-lg font-medium py-2 px-4 rounded-md transition-colors w-full text-center",
+                    isActive(link.href) 
+                      ? "text-accent bg-accent/10" 
+                      : "text-foreground hover:text-accent hover:bg-accent/5"
+                  )}
+                  onClick={() => setMobileNavOpen(false)}
+                >
+                  {link.name}
+                </Link>
+              ))}
+              <div className="pt-4">
+                <Link
+                  to="/contact"
+                  className="block w-full text-center px-6 py-3 rounded-full text-base font-medium bg-accent text-white hover:bg-accent/90 transition-colors"
+                  onClick={() => setMobileNavOpen(false)}
+                >
+                  Get Free Consultation
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>
