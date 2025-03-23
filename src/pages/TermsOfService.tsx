@@ -17,7 +17,7 @@ const TermsOfService = () => {
         <div className="max-w-4xl mx-auto prose prose-slate dark:prose-invert">
           <h2>Introduction</h2>
           <p>
-            Welcome to BMCrafts ("we," "our," or "us"). By accessing our website at bmcrafts.com, you are agreeing to be bound by these terms of service, all applicable laws and regulations, and agree that you are responsible for compliance with any applicable local laws.
+            Welcome to BMCrafts ("we," "our," or "us"). By accessing our website at bmcrafts.co.uk, you are agreeing to be bound by these terms of service, all applicable laws and regulations, and agree that you are responsible for compliance with any applicable local laws.
           </p>
           <p>
             If you do not agree with any of these terms, you are prohibited from using or accessing this site. The materials contained in this website are protected by applicable copyright and trademark law.
@@ -100,7 +100,7 @@ const TermsOfService = () => {
 
           <h2>Contact Information</h2>
           <p>
-            Questions about the Terms of Service should be sent to us at legal@bmcrafts.com.
+            Questions about the Terms of Service should be sent to us at legal@bmcrafts.co.uk.
           </p>
         </div>
       </main>

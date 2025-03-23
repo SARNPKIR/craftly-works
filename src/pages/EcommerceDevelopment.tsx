@@ -28,21 +28,21 @@ const EcommerceDevelopment = () => {
         <title>E-commerce Website Development UK | Shopify & WooCommerce | BMCrafts</title>
         <meta name="description" content="Need a scalable e-commerce website? BM Crafts offers expert Shopify, WooCommerce, and Magento development in the UK with mobile-first design and SEO to boost sales." />
         <meta name="keywords" content="e-commerce website development UK, Shopify developer UK, WooCommerce website design, mobile-first e-commerce solutions UK, e-commerce SEO services UK" />
-        <link rel="canonical" href="https://bmcrafts.com/services/ecommerce-development" />
+        <link rel="canonical" href="https://bmcrafts.co.uk/services/ecommerce-development" />
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://bmcrafts.com/services/ecommerce-development" />
+        <meta property="og:url" content="https://bmcrafts.co.uk/services/ecommerce-development" />
         <meta property="og:title" content="E-commerce Website Development UK | BMCrafts" />
         <meta property="og:description" content="Expert Shopify, WooCommerce, and Magento development with mobile-first design and SEO to boost your online sales." />
-        <meta property="og:image" content="https://bmcrafts.com/images/ecommerce-development.jpg" />
+        <meta property="og:image" content="https://bmcrafts.co.uk/images/ecommerce-development.jpg" />
         
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://bmcrafts.com/services/ecommerce-development" />
+        <meta property="twitter:url" content="https://bmcrafts.co.uk/services/ecommerce-development" />
         <meta property="twitter:title" content="E-commerce Website Development UK | BMCrafts" />
         <meta property="twitter:description" content="Expert Shopify, WooCommerce, and Magento development with mobile-first design and SEO to boost your online sales." />
-        <meta property="twitter:image" content="https://bmcrafts.com/images/ecommerce-development.jpg" />
+        <meta property="twitter:image" content="https://bmcrafts.co.uk/images/ecommerce-development.jpg" />
         
         {/* Schema.org markup for Google */}
         <script type="application/ld+json">

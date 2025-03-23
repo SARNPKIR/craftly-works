@@ -1,10 +1,20 @@
 import { useState } from 'react';
-import { ArrowRight, CheckCircle } from 'lucide-react';
+import { ArrowRight, CheckCircle, AlertCircle } from 'lucide-react';
 import AnimatedGradient from '../ui/AnimatedGradient';
 import { Button } from '@/components/ui/button';
+import { sendEmail } from '../../api/sendEmail';
+
+interface FormState {
+  name: string;
+  email: string;
+  phone: string;
+  company: string;
+  message: string;
+  service: string;
+}
 
 const Contact = () => {
-  const [formState, setFormState] = useState({
+  const [formState, setFormState] = useState<FormState>({
     name: '',
     email: '',
     phone: '',
@@ -15,18 +25,20 @@ const Contact = () => {
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormState(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitError(null);
     
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      await sendEmail(formState);
       setIsSubmitting(false);
       setIsSubmitted(true);
       
@@ -42,7 +54,11 @@ const Contact = () => {
         });
         setIsSubmitted(false);
       }, 5000);
-    }, 1500);
+    } catch (error) {
+      setIsSubmitting(false);
+      setSubmitError('There was a problem sending your message. Please try again or contact us directly via email.');
+      console.error('Contact form error:', error);
+    }
   };
 
   return (
@@ -62,6 +78,13 @@ const Contact = () => {
           <div className="mb-6">
             <h3 className="text-xl font-bold mb-6">Ready to transform your digital presence? Get in touch for a free consultation and custom quote for your project.</h3>
           </div>
+          
+          {submitError && (
+            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-md flex items-center text-red-700">
+              <AlertCircle className="h-5 w-5 mr-2 flex-shrink-0" />
+              <p>{submitError}</p>
+            </div>
+          )}
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 mb-6">
             <div className="form-group">

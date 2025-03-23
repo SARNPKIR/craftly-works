@@ -30,8 +30,8 @@ const contactInfo = [
     icon: Mail,
     title: "Email",
     details: [
-      "info@bmcrafts.com",
-      "support@bmcrafts.com"
+      "info@bmcrafts.co.uk",
+      "support@bmcrafts.co.uk"
     ]
   },
   {

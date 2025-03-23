@@ -17,4 +17,4 @@ Allow: /
 Disallow: /admin/
 
 # Sitemap location
-Sitemap: https://bmcrafts.com/sitemap.xml
+Sitemap: https://bmcrafts.co.uk/sitemap.xml

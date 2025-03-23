@@ -17,7 +17,7 @@ const CookiePolicy = () => {
         <div className="max-w-4xl mx-auto prose prose-slate dark:prose-invert">
           <h2>Introduction</h2>
           <p>
-            This Cookie Policy explains how BMCrafts ("we", "us", and "our") uses cookies and similar technologies to recognize you when you visit our website at bmcrafts.com ("Website"). It explains what these technologies are and why we use them, as well as your rights to control our use of them.
+            This Cookie Policy explains how BMCrafts ("Company", "we", "us", and "our") uses cookies and similar technologies to recognize you when you visit our website at bmcrafts.co.uk ("Website"). It explains what these technologies are and why we use them, as well as your rights to control our use of them.
           </p>
           <p>
             In some cases we may use cookies to collect personal information, or that becomes personal information if we combine it with other information.
@@ -45,7 +45,7 @@ const CookiePolicy = () => {
           <ul>
             <li><strong>Name:</strong> __session</li>
             <li><strong>Purpose:</strong> Used to maintain an anonymous user session by the server.</li>
-            <li><strong>Provider:</strong> bmcrafts.com</li>
+            <li><strong>Provider:</strong> bmcrafts.co.uk</li>
             <li><strong>Service:</strong> Self-hosted</li>
             <li><strong>Expiry:</strong> Session</li>
             <li><strong>Type:</strong> HTTP Cookie</li>
@@ -133,7 +133,7 @@ const CookiePolicy = () => {
 
           <h2>Where can I get further information?</h2>
           <p>
-            If you have any questions about our use of cookies or other technologies, please email us at privacy@bmcrafts.com or by post to:
+            If you have any questions about our use of cookies or other technologies, please email us at privacy@bmcrafts.co.uk or by post to:
           </p>
           <p>
             BMCrafts<br />

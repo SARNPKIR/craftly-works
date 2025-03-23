@@ -23,13 +23,13 @@ const EducationalDevelopment: React.FC = () => {
         <meta property="og:title" content="Educational Course Websites & LMS Development UK | BMCrafts" />
         <meta property="og:description" content="Custom LMS development from £500. Create engaging online courses, student portals & assessment systems for UK educational institutions & trainers." />
         <meta property="og:image" content="/images/educational-development.jpg" />
-        <meta property="og:url" content="https://bmcrafts.com/services/educational-development" />
+        <meta property="og:url" content="https://bmcrafts.co.uk/services/educational-development" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Educational Course Websites & LMS Development UK | BMCrafts" />
         <meta name="twitter:description" content="Custom LMS development from £500. Create engaging online courses, student portals & assessment systems for UK educational institutions & trainers." />
         <meta name="twitter:image" content="/images/educational-development.jpg" />
-        <link rel="canonical" href="https://bmcrafts.com/services/educational-development" />
+        <link rel="canonical" href="https://bmcrafts.co.uk/services/educational-development" />
         <script type="application/ld+json">
           {`
             {
@@ -46,7 +46,7 @@ const EducationalDevelopment: React.FC = () => {
                 "telephone": "+44-123-456-7890",
                 "priceRange": "£500+",
                 "image": "/images/bmcrafts-logo.png",
-                "url": "https://bmcrafts.com"
+                "url": "https://bmcrafts.co.uk"
               },
               "areaServed": "United Kingdom",
               "description": "Custom Learning Management System (LMS) development and educational course websites for UK trainers, tutors, and educational institutions.",
@@ -104,7 +104,7 @@ const EducationalDevelopment: React.FC = () => {
           </div>
           <div className="rounded-lg overflow-hidden">
             <img 
-              src="/images/educational-platform.jpg" 
+              src="/services/images/educational-platform.jpg" 
               alt="Educational course platform with student dashboard and learning materials" 
               className="w-full h-full object-cover"
             />

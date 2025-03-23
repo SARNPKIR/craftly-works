@@ -36,7 +36,7 @@ const PrivacyPolicy = () => {
             <li><strong>Personal Data:</strong> any information that directly, indirectly, or in connection with other information allows for the identification or identifiability of a natural person.</li>
             <li><strong>Service:</strong> refers to the service provided by BMCrafts as described in the relative terms and on this platform.</li>
             <li><strong>Third-party service:</strong> refers to advertisers, contest sponsors, promotional and marketing partners, and others who provide our content or whose products or services we think may interest you.</li>
-            <li><strong>Website:</strong> BMCrafts's site, which can be accessed via this URL: bmcrafts.com</li>
+            <li><strong>Website:</strong> BMCrafts's site, which can be accessed via this URL: bmcrafts.co.uk</li>
             <li><strong>You:</strong> a person or entity that is registered with BMCrafts to use the Services.</li>
           </ul>
 
@@ -106,8 +106,8 @@ const PrivacyPolicy = () => {
             If you have any questions about this Privacy Policy, please contact us:
           </p>
           <ul>
-            <li>By email: privacy@bmcrafts.com</li>
-            <li>By visiting this page on our website: bmcrafts.com/contact</li>
+            <li>By email: privacy@bmcrafts.co.uk</li>
+            <li>By visiting this page on our website: bmcrafts.co.uk/contact</li>
             <li>By phone number: +44 (0) 123 456 7890</li>
             <li>By mail: 123 Web Street, Digital City, UK</li>
           </ul>
