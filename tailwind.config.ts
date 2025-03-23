@@ -158,8 +158,8 @@ export default {
 				'pulse-subtle': 'pulse-subtle 3s ease-in-out infinite'
 			},
 			fontFamily: {
-				sans: ['SF Pro Display', 'Inter', 'system-ui', 'sans-serif'],
-				serif: ['SF Pro Text', 'serif'],
+				sans: ['Poppins', 'system-ui', 'sans-serif'],
+				serif: ['Playfair Display', 'serif'],
 			}
 		}
 	},
