@@ -5,17 +5,17 @@ import AnimatedGradient from '../ui/AnimatedGradient';
 const features = [
   {
     title: 'Transparent Pricing',
-    description: 'Flat-rate packages with no hidden fees. You know exactly what you're paying for from the start.',
+    description: 'Flat-rate packages with no hidden fees. You know exactly what you\'re paying for from the start.',
     icon: DollarSign,
   },
   {
     title: 'Expert Industry Focus',
-    description: 'We specialize in specific industries, ensuring your solution is tailored to your sector's needs.',
+    description: 'We specialize in specific industries, ensuring your solution is tailored to your sector\'s needs.',
     icon: Focus,
   },
   {
     title: 'Post-Launch Support',
-    description: 'Our relationship doesn't end at launch. We provide ongoing support to ensure your success.',
+    description: 'Our relationship doesn\'t end at launch. We provide ongoing support to ensure your success.',
     icon: Headphones,
   },
   {
