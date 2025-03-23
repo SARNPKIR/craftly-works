@@ -1,214 +1,288 @@
 
+import React from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PageHeader from "@/components/layout/PageHeader";
 import Breadcrumbs from "@/components/layout/Breadcrumbs";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Link } from "react-router-dom";
-import { ArrowRight, Calendar, User } from "lucide-react";
-import { useState } from "react";
-
-const categories = [
-  "All",
-  "E-commerce",
-  "Healthcare",
-  "Real Estate",
-  "Legal",
-  "Web Development",
-  "Design",
-  "Marketing"
-];
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Clock, User, Tag, ChevronRight } from "lucide-react";
 
 const blogPosts = [
   {
     id: 1,
-    title: "10 Essential Features Every E-commerce Website Should Have",
-    category: "E-commerce",
-    excerpt: "Discover the must-have features that drive conversions and improve user experience on your online store.",
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80",
+    title: "10 Essential Components Every Business Website Should Have",
+    excerpt: "Discover the key elements that can transform a basic website into a powerful business tool that drives conversions and engagement.",
+    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    category: "Web Design",
     author: "Jane Smith",
     date: "May 15, 2023",
-    readTime: "8 min read"
-  },
-  {
-    id: 2,
-    title: "HIPAA Compliance: What Healthcare Websites Need to Know",
-    category: "Healthcare",
-    excerpt: "Understand the essential requirements for creating secure, compliant websites for healthcare organizations.",
-    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80",
-    author: "Dr. Michael Johnson",
-    date: "April 28, 2023",
-    readTime: "10 min read"
-  },
-  {
-    id: 3,
-    title: "The Power of Local SEO for Real Estate Websites",
-    category: "Real Estate",
-    excerpt: "Learn how location-based optimization can dramatically increase visibility for property listings and agencies.",
-    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80",
-    author: "Sarah Williams",
-    date: "June 7, 2023",
-    readTime: "7 min read"
-  },
-  {
-    id: 4,
-    title: "7 Ways to Improve Your Website's Loading Speed",
-    category: "Web Development",
-    excerpt: "Discover practical techniques to optimize your website's performance and provide a better user experience.",
-    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80",
-    author: "John Miller",
-    date: "May 23, 2023",
     readTime: "6 min read"
   },
   {
-    id: 5,
-    title: "Building Trust: Essential Elements for Law Firm Websites",
-    category: "Legal",
-    excerpt: "Learn how to create a professional online presence that establishes credibility and attracts potential clients.",
-    image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80",
-    author: "Robert Johnson",
-    date: "April 15, 2023",
-    readTime: "9 min read"
-  },
-  {
-    id: 6,
-    title: "The Psychology of Color in Web Design",
-    category: "Design",
-    excerpt: "Explore how color choices influence user behavior and brand perception on your website.",
-    image: "https://images.unsplash.com/photo-1508068451742-4a6ac38472e4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80",
-    author: "Emily Davis",
-    date: "June 2, 2023",
-    readTime: "7 min read"
-  },
-  {
-    id: 7,
-    title: "Maximizing ROI: Digital Marketing Strategies for Healthcare Providers",
-    category: "Healthcare",
-    excerpt: "Discover effective marketing approaches specifically tailored for medical practices and healthcare organizations.",
-    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80",
-    author: "David Wilson",
-    date: "May 19, 2023",
+    id: 2,
+    title: "How to Choose the Right E-commerce Platform for Your Business",
+    excerpt: "A comprehensive guide to selecting an e-commerce platform that aligns with your business needs, budget, and growth plans.",
+    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    category: "E-commerce",
+    author: "John Miller",
+    date: "April 28, 2023",
     readTime: "8 min read"
   },
   {
-    id: 8,
-    title: "Essential Analytics for E-commerce Owners",
-    category: "E-commerce",
-    excerpt: "Learn which metrics matter most for understanding your online store's performance and growth opportunities.",
-    image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80",
-    author: "Alex Thompson",
-    date: "June 12, 2023",
-    readTime: "9 min read"
+    id: 3,
+    title: "Improving Website Performance: Speed Optimization Techniques",
+    excerpt: "Learn practical strategies to enhance your website's loading speed and overall performance for better user experience and SEO rankings.",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    category: "Performance",
+    author: "Sarah Johnson",
+    date: "April 10, 2023",
+    readTime: "5 min read"
   },
+  {
+    id: 4,
+    title: "The Ultimate Guide to Effective Content Marketing for Small Businesses",
+    excerpt: "Discover how to create and distribute valuable content that attracts and engages your target audience while driving business growth.",
+    image: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    category: "Marketing",
+    author: "Michael Brown",
+    date: "March 22, 2023",
+    readTime: "10 min read"
+  },
+  {
+    id: 5,
+    title: "Website Security Essentials: Protecting Your Business Online",
+    excerpt: "Explore the fundamental security measures every business website should implement to safeguard customer data and business information.",
+    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    category: "Security",
+    author: "Jane Smith",
+    date: "March 8, 2023",
+    readTime: "7 min read"
+  },
+  {
+    id: 6,
+    title: "Responsive Design Best Practices for 2023",
+    excerpt: "Stay ahead of the curve with these essential responsive design techniques to ensure your website performs flawlessly across all devices.",
+    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    category: "Web Design",
+    author: "John Miller",
+    date: "February 19, 2023",
+    readTime: "6 min read"
+  }
 ];
 
+const categories = [
+  { name: "Web Design", count: 8 },
+  { name: "E-commerce", count: 6 },
+  { name: "Performance", count: 5 },
+  { name: "Marketing", count: 7 },
+  { name: "Security", count: 4 },
+  { name: "Development", count: 9 }
+];
+
+const featuredPosts = blogPosts.slice(0, 3);
+const recentPosts = blogPosts.slice(3);
+
 const Blog = () => {
-  const [activeCategory, setActiveCategory] = useState("All");
-
-  const filteredPosts = activeCategory === "All" 
-    ? blogPosts 
-    : blogPosts.filter(post => post.category === activeCategory);
-
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       <PageHeader 
         title="Our Blog" 
-        subtitle="Industry insights, expert tips, and digital trends"
+        subtitle="Insights, tips, and trends in web development and digital marketing"
       />
       <Breadcrumbs />
       
-      <section className="py-12">
+      <section className="py-16">
         <div className="container mx-auto px-6">
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
-            {categories.map((category) => (
-              <Button 
-                key={category}
-                variant={activeCategory === category ? "default" : "outline"}
-                size="sm"
-                onClick={() => setActiveCategory(category)}
-              >
-                {category}
-              </Button>
-            ))}
+          {/* Featured Posts */}
+          <div className="mb-16">
+            <h2 className="text-2xl font-bold mb-8">Featured Articles</h2>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {featuredPosts.map((post) => (
+                <FeaturedPostCard key={post.id} post={post} />
+              ))}
+            </div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredPosts.map((post) => (
-              <Card key={post.id} className="overflow-hidden hover-card">
-                <div className="h-48 overflow-hidden">
-                  <img 
-                    src={post.image} 
-                    alt={post.title} 
-                    className="w-full h-full object-cover transition-transform hover:scale-105 duration-300"
-                  />
-                </div>
-                <div className="px-6 py-4 border-b bg-accent/5">
-                  <span className="text-xs font-medium text-accent">
-                    {post.category}
-                  </span>
-                  <div className="flex items-center gap-4 text-sm text-gray-500 mt-2">
-                    <div className="flex items-center gap-1">
-                      <Calendar size={14} />
-                      <span>{post.date}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <User size={14} />
-                      <span>{post.author}</span>
-                    </div>
-                  </div>
-                </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            {/* Main Content */}
+            <div className="lg:col-span-2">
+              <h2 className="text-2xl font-bold mb-8">Recent Articles</h2>
+              <div className="space-y-8">
+                {recentPosts.map((post) => (
+                  <RecentPostCard key={post.id} post={post} />
+                ))}
+              </div>
+              
+              <div className="mt-12 flex justify-center">
+                <button className="inline-flex items-center justify-center px-6 py-3 border border-gray-300 rounded-full text-base font-medium hover:bg-gray-50 transition-colors">
+                  Load More Articles
+                </button>
+              </div>
+            </div>
+            
+            {/* Sidebar */}
+            <div className="lg:col-span-1 space-y-8">
+              {/* Categories Widget */}
+              <Card>
                 <CardContent className="p-6">
-                  <h3 className="text-xl font-bold mb-3 line-clamp-2">{post.title}</h3>
-                  <p className="text-gray-600 mb-4 line-clamp-3">{post.excerpt}</p>
-                  <span className="text-sm text-gray-500">{post.readTime}</span>
+                  <h3 className="text-xl font-bold mb-4">Categories</h3>
+                  <div className="space-y-2">
+                    {categories.map((category, index) => (
+                      <div key={index} className="flex justify-between items-center py-2 border-b border-gray-100 last:border-0">
+                        <Link to="#" className="text-gray-600 hover:text-accent transition-colors">
+                          {category.name}
+                        </Link>
+                        <span className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full">
+                          {category.count}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
                 </CardContent>
-                <CardFooter className="pt-0 px-6 pb-6">
-                  <Button variant="outline" className="w-full" asChild>
-                    <Link to="#" className="flex items-center justify-center gap-2">
-                      Read Article <ArrowRight size={16} />
-                    </Link>
-                  </Button>
-                </CardFooter>
               </Card>
-            ))}
-          </div>
-          
-          {filteredPosts.length === 0 && (
-            <div className="text-center py-12">
-              <h3 className="text-xl font-medium mb-2">No articles found in this category</h3>
-              <p className="text-gray-600 mb-4">Please try selecting another category or check back later for new content.</p>
-              <Button onClick={() => setActiveCategory("All")}>View All Articles</Button>
+              
+              {/* Subscribe Widget */}
+              <Card className="bg-accent text-white overflow-hidden">
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-bold mb-4">Subscribe to Our Newsletter</h3>
+                  <p className="mb-6 text-white/80">
+                    Get the latest insights and tips delivered straight to your inbox.
+                  </p>
+                  <form>
+                    <div className="mb-4">
+                      <input 
+                        type="email" 
+                        placeholder="Your email address" 
+                        className="w-full px-4 py-2 rounded-md text-gray-900 focus:outline-none focus:ring-2 focus:ring-white"
+                      />
+                    </div>
+                    <button 
+                      type="submit"
+                      className="w-full bg-white text-accent px-4 py-2 rounded-md font-medium hover:bg-gray-100 transition-colors"
+                    >
+                      Subscribe
+                    </button>
+                  </form>
+                </CardContent>
+              </Card>
+              
+              {/* Popular Tags Widget */}
+              <Card>
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-bold mb-4">Popular Tags</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {["Web Design", "SEO", "E-commerce", "Development", "UX/UI", "Mobile", "WordPress", "Performance", "Marketing"].map((tag, index) => (
+                      <Link 
+                        key={index} 
+                        to="#" 
+                        className="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full hover:bg-gray-200 transition-colors"
+                      >
+                        {tag}
+                      </Link>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
             </div>
-          )}
-        </div>
-      </section>
-      
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-4">Subscribe to Our Newsletter</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto mb-8">
-            Get the latest articles, industry insights, and digital trends delivered directly to your inbox.
-          </p>
-          <div className="max-w-md mx-auto">
-            <div className="flex gap-3">
-              <input 
-                type="email" 
-                placeholder="Your email address" 
-                className="flex-1 px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-accent"
-              />
-              <Button>Subscribe</Button>
-            </div>
-            <p className="text-sm text-gray-500 mt-3">
-              We respect your privacy. Unsubscribe at any time.
-            </p>
           </div>
         </div>
       </section>
       
       <Footer />
     </div>
+  );
+};
+
+interface PostProps {
+  post: {
+    id: number;
+    title: string;
+    excerpt: string;
+    image: string;
+    category: string;
+    author: string;
+    date: string;
+    readTime: string;
+  };
+}
+
+const FeaturedPostCard = ({ post }: PostProps) => {
+  return (
+    <Card className="overflow-hidden hover-card h-full flex flex-col">
+      <div className="h-48 overflow-hidden">
+        <img 
+          src={post.image} 
+          alt={post.title} 
+          className="w-full h-full object-cover"
+        />
+      </div>
+      <CardContent className="p-6 flex-grow">
+        <div className="flex items-center mb-3">
+          <span className="bg-accent/10 text-accent px-3 py-1 rounded-full text-xs font-medium">
+            {post.category}
+          </span>
+        </div>
+        <h3 className="text-xl font-bold mb-3 line-clamp-2">{post.title}</h3>
+        <p className="text-gray-600 mb-4 line-clamp-3">{post.excerpt}</p>
+      </CardContent>
+      <CardFooter className="px-6 pb-6 pt-0 flex justify-between items-center">
+        <div className="flex items-center text-sm text-gray-500">
+          <Clock size={14} className="mr-1" />
+          <span>{post.readTime}</span>
+        </div>
+        <Link 
+          to="#" 
+          className="text-accent font-medium flex items-center hover:underline"
+        >
+          Read Article <ChevronRight size={16} className="ml-1" />
+        </Link>
+      </CardFooter>
+    </Card>
+  );
+};
+
+const RecentPostCard = ({ post }: PostProps) => {
+  return (
+    <Card className="overflow-hidden hover-card">
+      <div className="flex flex-col md:flex-row">
+        <div className="md:w-1/3 h-48 md:h-auto overflow-hidden">
+          <img 
+            src={post.image} 
+            alt={post.title} 
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="md:w-2/3 p-6">
+          <div className="flex items-center mb-3">
+            <span className="bg-accent/10 text-accent px-3 py-1 rounded-full text-xs font-medium mr-3">
+              {post.category}
+            </span>
+            <div className="flex items-center text-sm text-gray-500">
+              <Clock size={14} className="mr-1" />
+              <span>{post.readTime}</span>
+            </div>
+          </div>
+          <h3 className="text-xl font-bold mb-3">{post.title}</h3>
+          <p className="text-gray-600 mb-4">{post.excerpt}</p>
+          <div className="flex justify-between items-center">
+            <div className="flex items-center text-sm text-gray-500">
+              <User size={14} className="mr-1" />
+              <span>{post.author}</span>
+              <span className="mx-2">•</span>
+              <span>{post.date}</span>
+            </div>
+            <Link 
+              to="#" 
+              className="text-accent font-medium flex items-center hover:underline"
+            >
+              Read Article <ChevronRight size={16} className="ml-1" />
+            </Link>
+          </div>
+        </div>
+      </div>
+    </Card>
   );
 };
 

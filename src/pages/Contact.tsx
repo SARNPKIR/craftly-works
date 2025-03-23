@@ -1,289 +1,143 @@
 
+import React from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PageHeader from "@/components/layout/PageHeader";
 import Breadcrumbs from "@/components/layout/Breadcrumbs";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Mail, Phone, MapPin, Clock } from "lucide-react";
-import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { MapPin, Phone, Mail, Clock, MessageSquare } from "lucide-react";
+import ContactForm from "@/components/sections/Contact";
 
-const contactMethods = [
+const contactInfo = [
   {
-    icon: Mail,
-    title: "Email Us",
-    description: "Our friendly team is here to help.",
-    contact: "hello@bmcrafts.com",
-    link: "mailto:hello@bmcrafts.com"
+    icon: MapPin,
+    title: "Our Office",
+    details: [
+      "123 Business Avenue",
+      "Tech District",
+      "San Francisco, CA 94105"
+    ]
   },
   {
     icon: Phone,
-    title: "Call Us",
-    description: "Mon-Fri from 8am to 5pm.",
-    contact: "+44 (0) 123 456 7890",
-    link: "tel:+441234567890"
+    title: "Phone",
+    details: [
+      "+1 (555) 123-4567",
+      "+1 (555) 987-6543"
+    ]
   },
   {
-    icon: MapPin,
-    title: "Visit Us",
-    description: "Come say hello at our office.",
-    contact: "123 Business Road, London, UK",
-    link: "https://maps.google.com"
+    icon: Mail,
+    title: "Email",
+    details: [
+      "info@bmcrafts.com",
+      "support@bmcrafts.com"
+    ]
   },
   {
     icon: Clock,
     title: "Working Hours",
-    description: "We're available for you:",
-    contact: "Monday-Friday: 9am-5pm",
-    link: "#"
+    details: [
+      "Monday - Friday: 9am - 6pm",
+      "Saturday: 10am - 4pm",
+      "Sunday: Closed"
+    ]
   }
 ];
 
-const projectTypes = [
-  "E-commerce Website",
-  "Healthcare Website",
-  "Real Estate Website",
-  "Law Firm Website",
-  "Non-profit Website",
-  "Custom Web Application",
-  "Other"
-];
-
-const budgetRanges = [
-  "£1,000 - £2,500",
-  "£2,500 - £5,000",
-  "£5,000 - £10,000",
-  "£10,000+"
-];
-
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    company: "",
-    projectType: "",
-    budget: "",
-    timeline: "",
-    message: ""
-  });
-  
-  const [formStatus, setFormStatus] = useState({
-    submitted: false,
-    success: false,
-    message: ""
-  });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Simulate form submission
-    setFormStatus({
-      submitted: true,
-      success: true,
-      message: "Thank you! Your message has been sent. We'll get back to you within 24 hours."
-    });
-    
-    // In a real application, you would send the form data to your server here
-    console.log("Form submitted:", formData);
-  };
-
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       <PageHeader 
         title="Contact Us" 
-        subtitle="Reach out to discuss your project or ask any questions"
+        subtitle="Get in touch with our team for any inquiries or project discussions"
       />
       <Breadcrumbs />
       
-      <section className="py-12">
+      <section className="py-16">
         <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-            {contactMethods.map((method, index) => (
-              <Card key={index} className="p-6 hover-card">
-                <div className="mb-4 w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-accent">
-                  <method.icon size={20} />
-                </div>
-                <h3 className="text-lg font-bold mb-2">{method.title}</h3>
-                <p className="text-gray-600 mb-3">{method.description}</p>
-                <a 
-                  href={method.link} 
-                  className="text-accent hover:underline font-medium"
-                  target={method.link.startsWith("http") ? "_blank" : undefined}
-                  rel={method.link.startsWith("http") ? "noopener noreferrer" : undefined}
-                >
-                  {method.contact}
-                </a>
-              </Card>
-            ))}
-          </div>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             <div>
-              <h2 className="text-3xl font-bold mb-6">Let's Discuss Your Project</h2>
-              <p className="text-gray-600 mb-8">
-                Fill out the form below to get started. We'll get back to you within 24 hours to discuss your project in detail.
+              <h2 className="text-3xl font-bold mb-6">We'd Love to Hear from You</h2>
+              <p className="text-gray-600 mb-10">
+                Whether you have a question about our services, pricing, or just want to discuss a project, 
+                our team is ready to answer all your questions.
               </p>
               
-              {formStatus.submitted ? (
-                <div className={`p-6 rounded-lg mb-8 ${formStatus.success ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>
-                  <p className="font-medium">{formStatus.message}</p>
-                </div>
-              ) : null}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+                {contactInfo.map((item, index) => (
+                  <Card key={index} className="hover-card">
+                    <CardContent className="p-6 flex">
+                      <div className="mr-4">
+                        <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-accent">
+                          <item.icon size={20} />
+                        </div>
+                      </div>
+                      <div>
+                        <h3 className="font-semibold mb-2">{item.title}</h3>
+                        {item.details.map((detail, i) => (
+                          <p key={i} className="text-gray-600 text-sm">{detail}</p>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
               
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                      Full Name *
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-accent focus:outline-none"
-                    />
+              <Card className="bg-gradient-to-r from-accent to-blue-600 text-white overflow-hidden">
+                <CardContent className="p-6 flex items-center">
+                  <div className="mr-6">
+                    <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center">
+                      <MessageSquare size={28} className="text-white" />
+                    </div>
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                      Email Address *
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-accent focus:outline-none"
-                    />
+                    <h3 className="text-xl font-bold mb-2">Live Chat Support</h3>
+                    <p className="text-white/80 mb-4">
+                      Need help right away? Chat with our support team instantly.
+                    </p>
+                    <Button className="bg-white text-accent hover:bg-gray-100">
+                      Start Chat
+                    </Button>
                   </div>
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-                      Phone Number
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-accent focus:outline-none"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-1">
-                      Company Name
-                    </label>
-                    <input
-                      type="text"
-                      id="company"
-                      name="company"
-                      value={formData.company}
-                      onChange={handleChange}
-                      className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-accent focus:outline-none"
-                    />
-                  </div>
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="projectType" className="block text-sm font-medium text-gray-700 mb-1">
-                      Project Type *
-                    </label>
-                    <select
-                      id="projectType"
-                      name="projectType"
-                      value={formData.projectType}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-accent focus:outline-none"
-                    >
-                      <option value="" disabled>Select project type</option>
-                      {projectTypes.map((type) => (
-                        <option key={type} value={type}>{type}</option>
-                      ))}
-                    </select>
-                  </div>
-                  <div>
-                    <label htmlFor="budget" className="block text-sm font-medium text-gray-700 mb-1">
-                      Budget Range *
-                    </label>
-                    <select
-                      id="budget"
-                      name="budget"
-                      value={formData.budget}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-accent focus:outline-none"
-                    >
-                      <option value="" disabled>Select budget range</option>
-                      {budgetRanges.map((range) => (
-                        <option key={range} value={range}>{range}</option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-                
-                <div>
-                  <label htmlFor="timeline" className="block text-sm font-medium text-gray-700 mb-1">
-                    Desired Timeline
-                  </label>
-                  <input
-                    type="text"
-                    id="timeline"
-                    name="timeline"
-                    value={formData.timeline}
-                    onChange={handleChange}
-                    placeholder="e.g., 2 months, ASAP, flexible"
-                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-accent focus:outline-none"
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                    Project Details *
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    rows={5}
-                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-accent focus:outline-none"
-                    placeholder="Tell us about your project goals, requirements, and any specific features you need..."
-                  ></textarea>
-                </div>
-                
-                <Button type="submit" size="lg" className="w-full md:w-auto">
-                  Send Message
-                </Button>
-              </form>
+                </CardContent>
+              </Card>
             </div>
             
-            <div className="rounded-xl overflow-hidden h-[600px]">
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2483.296751684157!2d-0.1415323!3d51.5129508!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604d49f4a3a5b%3A0x790260718555a20c!2sOxford%20St%2C%20London%2C%20UK!5e0!3m2!1sen!2sus!4v1610000000000!5m2!1sen!2sus" 
-                width="100%" 
-                height="100%" 
-                style={{ border: 0 }} 
-                allowFullScreen={true} 
-                loading="lazy"
-                title="Google Maps"
-              ></iframe>
+            <div>
+              <Card className="border-none shadow-lg">
+                <CardContent className="p-8">
+                  <h3 className="text-2xl font-bold mb-6">Send Us a Message</h3>
+                  <ContactForm />
+                </CardContent>
+              </Card>
             </div>
+          </div>
+        </div>
+      </section>
+      
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-6">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-3xl font-bold mb-6">Visit Our Office</h2>
+            <p className="text-gray-600">
+              Come by our office to meet the team and discuss your project in person.
+            </p>
+          </div>
+          
+          <div className="rounded-xl overflow-hidden shadow-lg h-[400px]">
+            <iframe 
+              title="BMCrafts Office Location"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12615.361777006475!2d-122.40142339118285!3d37.793564900861!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858062c2166cbf%3A0x4e85a8878f7f6650!2sDowntown%20San%20Francisco%2C%20San%20Francisco%2C%20CA!5e0!3m2!1sen!2sus!4v1651254234532!5m2!1sen!2sus" 
+              width="100%" 
+              height="100%" 
+              style={{ border: 0 }} 
+              allowFullScreen 
+              loading="lazy" 
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
           </div>
         </div>
       </section>

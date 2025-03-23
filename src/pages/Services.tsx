@@ -1,193 +1,92 @@
 
+import React from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PageHeader from "@/components/layout/PageHeader";
 import Breadcrumbs from "@/components/layout/Breadcrumbs";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { ShoppingCart, Heart, Home, Scale, Layers } from "lucide-react";
+import { Code, Paintbrush, ShoppingCart, BarChart, Smartphone, Globe } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const serviceCategories = [
+const services = [
   {
-    title: "E-commerce Development",
-    description: "Custom online stores built to sell and scale",
+    title: "Web Design & Development",
+    description: "Custom websites built from scratch with modern technologies and responsive design that works on all devices.",
+    icon: Paintbrush,
+    features: [
+      "Responsive design for all devices",
+      "Custom interface design",
+      "CMS integration (WordPress, Shopify, etc.)",
+      "SEO-optimized structure",
+      "Performance optimization"
+    ],
+    cta: "Get a Website Quote"
+  },
+  {
+    title: "E-commerce Solutions",
+    description: "Online stores that drive sales with seamless checkout experiences and powerful product management.",
     icon: ShoppingCart,
     features: [
       "Custom product catalogs",
-      "Secure payment integration",
+      "Secure payment processing",
       "Inventory management",
-      "Mobile-responsive design",
-      "SEO optimization",
-      "Analytics integration"
+      "Customer accounts",
+      "Order tracking"
     ],
-    packages: [
-      {
-        name: "Basic",
-        price: "£1,500",
-        features: ["Up to 50 products", "Standard payment gateways", "Basic SEO setup", "Responsive design"]
-      },
-      {
-        name: "Advanced",
-        price: "£3,000",
-        features: ["Up to 500 products", "Multiple payment options", "Advanced SEO", "Custom design", "Product filtering"]
-      },
-      {
-        name: "Premium",
-        price: "£4,500",
-        features: ["Unlimited products", "International shipping", "Full SEO package", "Custom features", "API integrations"]
-      }
-    ]
+    cta: "Build Your Store"
   },
   {
-    title: "Healthcare & Medical Websites",
-    description: "HIPAA-compliant websites for healthcare providers",
-    icon: Heart,
+    title: "Web Application Development",
+    description: "Custom web applications that solve specific business needs with robust functionality.",
+    icon: Code,
     features: [
-      "Appointment scheduling",
-      "Patient portals",
-      "HIPAA compliance",
-      "Medical resource libraries",
-      "Provider directories",
-      "Telemedicine integration"
+      "User authentication systems",
+      "Custom workflows & processes",
+      "Third-party API integration",
+      "Real-time functionality",
+      "Secure data handling"
     ],
-    packages: [
-      {
-        name: "Basic",
-        price: "£2,000",
-        features: ["Practice information", "Doctor profiles", "Contact forms", "Mobile-responsive"]
-      },
-      {
-        name: "Advanced",
-        price: "£3,500",
-        features: ["Online appointment booking", "Patient education resources", "Blog integration", "Enhanced SEO"]
-      },
-      {
-        name: "Premium",
-        price: "£5,000",
-        features: ["Patient portal", "Secure messaging", "EMR integration", "Telehealth capabilities"]
-      }
-    ]
+    cta: "Discuss Your App"
   },
   {
-    title: "Real Estate Websites",
-    description: "Property listing sites that convert visitors to clients",
-    icon: Home,
+    title: "Digital Marketing",
+    description: "Strategic marketing campaigns that drive traffic and generate leads for your business.",
+    icon: BarChart,
     features: [
-      "Property listings",
-      "Advanced search filters",
-      "Virtual tours",
-      "Agent profiles",
-      "Mortgage calculators",
-      "Lead generation forms"
+      "Search engine optimization (SEO)",
+      "Pay-per-click advertising (PPC)",
+      "Social media marketing",
+      "Email marketing campaigns",
+      "Analytics & reporting"
     ],
-    packages: [
-      {
-        name: "Basic",
-        price: "£1,800",
-        features: ["Property listings", "Agent profiles", "Contact forms", "Mobile-friendly design"]
-      },
-      {
-        name: "Advanced",
-        price: "£3,200",
-        features: ["IDX integration", "Advanced search", "Lead capture", "CRM integration"]
-      },
-      {
-        name: "Premium",
-        price: "£4,800",
-        features: ["Virtual tours", "Custom property filters", "Analytics dashboard", "Full MLS sync"]
-      }
-    ]
+    cta: "Grow Your Reach"
   },
   {
-    title: "Law Firm Websites",
-    description: "Professional sites that build trust and generate leads",
-    icon: Scale,
+    title: "Mobile App Development",
+    description: "Native and cross-platform mobile applications for iOS and Android devices.",
+    icon: Smartphone,
     features: [
-      "Practice area pages",
-      "Attorney profiles",
-      "Case results",
-      "Testimonials",
-      "Blog/resources section",
-      "Contact and consultation forms"
+      "Native iOS & Android development",
+      "Cross-platform solutions",
+      "UI/UX design for mobile",
+      "App store optimization",
+      "Push notifications"
     ],
-    packages: [
-      {
-        name: "Basic",
-        price: "£2,000",
-        features: ["Firm overview", "Attorney profiles", "Practice areas", "Contact forms"]
-      },
-      {
-        name: "Advanced",
-        price: "£3,500",
-        features: ["Case studies", "Testimonials section", "Blog integration", "Local SEO"]
-      },
-      {
-        name: "Premium",
-        price: "£5,000",
-        features: ["Client portal", "Document sharing", "Appointment scheduling", "Marketing automation"]
-      }
-    ]
+    cta: "Create Your App"
   },
   {
-    title: "Non-profit & Charity Websites",
-    description: "Impactful sites that drive donations and engagement",
-    icon: Heart,
+    title: "Maintenance & Support",
+    description: "Ongoing support and maintenance to keep your digital assets secure and up-to-date.",
+    icon: Globe,
     features: [
-      "Donation integration",
-      "Event calendars",
-      "Volunteer management",
-      "Impact stories",
-      "Newsletter signup",
-      "Social media integration"
+      "Regular security updates",
+      "Performance optimization",
+      "Content updates",
+      "Technical support",
+      "Monitoring & backups"
     ],
-    packages: [
-      {
-        name: "Basic",
-        price: "£1,500",
-        features: ["Organization overview", "Donation button", "Contact forms", "Mobile-responsive"]
-      },
-      {
-        name: "Advanced",
-        price: "£3,000",
-        features: ["Donation platform", "Event calendar", "Blog integration", "Email signup"]
-      },
-      {
-        name: "Premium",
-        price: "£4,500",
-        features: ["Member portal", "Volunteer management", "CRM integration", "Campaign pages"]
-      }
-    ]
-  },
-  {
-    title: "Custom Web Applications",
-    description: "Tailored software solutions for unique business challenges",
-    icon: Layers,
-    features: [
-      "User authentication",
-      "Database integration",
-      "Third-party API connections",
-      "Custom dashboards",
-      "Reporting tools",
-      "Scalable architecture"
-    ],
-    packages: [
-      {
-        name: "Basic",
-        price: "£5,000+",
-        features: ["User authentication", "Basic data management", "Simple workflows", "Responsive design"]
-      },
-      {
-        name: "Advanced",
-        price: "£10,000+",
-        features: ["Complex workflows", "API integrations", "Advanced reporting", "User roles"]
-      },
-      {
-        name: "Enterprise",
-        price: "£20,000+",
-        features: ["Custom modules", "Enterprise integration", "Advanced security", "Scalable infrastructure"]
-      }
-    ]
+    cta: "Get Support"
   }
 ];
 
@@ -197,85 +96,117 @@ const Services = () => {
       <Navbar />
       <PageHeader 
         title="Our Services" 
-        subtitle="Industry-specific web solutions with transparent pricing"
+        subtitle="Comprehensive web solutions to help your business grow online"
       />
       <Breadcrumbs />
       
-      {serviceCategories.map((service, index) => (
-        <section key={index} className={`py-16 ${index % 2 === 1 ? 'bg-gray-50' : ''}`}>
-          <div className="container mx-auto px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12">
-              <div>
-                <div className="flex items-center mb-4">
-                  <div className="mr-4 w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-accent">
-                    <service.icon size={20} />
+      <section className="py-16">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {services.map((service, index) => (
+              <Card key={index} className="hover-card border-none shadow-lg overflow-hidden">
+                <CardContent className="p-0">
+                  <div className="p-6 border-b">
+                    <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-accent mb-4">
+                      <service.icon size={24} />
+                    </div>
+                    <h3 className="text-xl font-bold mb-3">{service.title}</h3>
+                    <p className="text-gray-600">{service.description}</p>
                   </div>
-                  <h2 className="text-3xl font-bold">{service.title}</h2>
-                </div>
-                <p className="text-lg text-gray-600 mb-6">{service.description}</p>
-                <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {service.features.map((feature, i) => (
-                    <li key={i} className="flex items-center">
-                      <svg className="w-5 h-5 text-accent mr-2" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="rounded-2xl overflow-hidden shadow-xl h-[350px] bg-white">
-                <img 
-                  src={`https://source.unsplash.com/random/800x600/?${service.title.toLowerCase().replace(/\s/g, '')}`}
-                  alt={service.title} 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {service.packages.map((pkg, i) => (
-                <Card key={i} className="hover-card">
-                  <CardHeader>
-                    <CardTitle>{pkg.name}</CardTitle>
-                    <CardDescription>
-                      <span className="text-2xl font-bold text-foreground">{pkg.price}</span>
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-2">
-                      {pkg.features.map((feature, j) => (
-                        <li key={j} className="flex items-start">
-                          <svg className="w-5 h-5 text-accent mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                          </svg>
-                          {feature}
+                  
+                  <div className="p-6">
+                    <h4 className="font-semibold mb-3">What's included:</h4>
+                    <ul className="space-y-2 mb-6">
+                      {service.features.map((feature, i) => (
+                        <li key={i} className="flex items-start">
+                          <span className="mr-2 mt-1 text-accent">•</span>
+                          <span className="text-gray-600">{feature}</span>
                         </li>
                       ))}
                     </ul>
-                  </CardContent>
-                  <CardFooter>
-                    <Button className="w-full" asChild>
-                      <Link to="/contact">Get Started</Link>
-                    </Button>
-                  </CardFooter>
-                </Card>
-              ))}
+                    
+                    <Link to="/contact">
+                      <Button className="w-full">{service.cta}</Button>
+                    </Link>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+      
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <span className="bg-accent/10 text-accent px-4 py-1.5 rounded-full text-sm font-medium mb-6 inline-block">
+                Our Approach
+              </span>
+              <h2 className="text-3xl font-bold mb-6">How We Deliver Exceptional Services</h2>
+              <div className="space-y-6">
+                <div className="flex">
+                  <div className="mr-4 flex-shrink-0">
+                    <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-white font-medium">
+                      1
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-semibold mb-1">Discovery</h4>
+                    <p className="text-gray-600">We start by understanding your business goals, audience, and requirements through in-depth consultation.</p>
+                  </div>
+                </div>
+                
+                <div className="flex">
+                  <div className="mr-4 flex-shrink-0">
+                    <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-white font-medium">
+                      2
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-semibold mb-1">Strategy</h4>
+                    <p className="text-gray-600">We create a detailed roadmap and solution design tailored to your specific needs and objectives.</p>
+                  </div>
+                </div>
+                
+                <div className="flex">
+                  <div className="mr-4 flex-shrink-0">
+                    <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-white font-medium">
+                      3
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-semibold mb-1">Implementation</h4>
+                    <p className="text-gray-600">Our expert team brings your project to life with regular updates and feedback sessions.</p>
+                  </div>
+                </div>
+                
+                <div className="flex">
+                  <div className="mr-4 flex-shrink-0">
+                    <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-white font-medium">
+                      4
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-semibold mb-1">Support & Growth</h4>
+                    <p className="text-gray-600">We provide ongoing maintenance and optimization to ensure your digital solution evolves with your business.</p>
+                  </div>
+                </div>
+              </div>
+              
+              <Link to="/contact" className="mt-8 inline-block">
+                <Button size="lg">Schedule a Consultation</Button>
+              </Link>
+            </div>
+            
+            <div className="relative rounded-2xl overflow-hidden shadow-xl h-[500px]">
+              <img 
+                src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" 
+                alt="Our team working on a project" 
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
-        </section>
-      ))}
-      
-      <section className="py-16 bg-accent text-white">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-6">Need a Custom Solution?</h2>
-          <p className="text-white/80 max-w-2xl mx-auto mb-8">
-            We can create a tailor-made package specifically for your business requirements.
-            Let's discuss how we can help you achieve your digital goals.
-          </p>
-          <Button className="bg-white text-accent hover:bg-white/90" size="lg" asChild>
-            <Link to="/contact">Contact Us for a Custom Quote</Link>
-          </Button>
         </div>
       </section>
       

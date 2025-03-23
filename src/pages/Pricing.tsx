@@ -1,365 +1,283 @@
 
+import React from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PageHeader from "@/components/layout/PageHeader";
 import Breadcrumbs from "@/components/layout/Breadcrumbs";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckCircle2, ArrowRight } from "lucide-react";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Check, X, HelpCircle } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { Link } from "react-router-dom";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { useState } from "react";
 
-const industries = ["E-commerce", "Healthcare", "Real Estate", "Legal", "Non-profit"];
-
-const pricingPlans = {
-  "E-commerce": [
-    {
-      name: "Basic Store",
-      price: "£1,500",
-      features: [
-        "Up to 50 products",
-        "Responsive design",
-        "Product categories",
-        "Shopping cart",
-        "Standard payment gateways",
-        "Basic SEO setup",
-        "Contact form",
-        "3 months support"
-      ]
-    },
-    {
-      name: "Advanced Store",
-      price: "£3,000",
-      popular: true,
-      features: [
-        "Up to 500 products",
-        "Custom design",
-        "Advanced product filtering",
-        "User reviews & ratings",
-        "Multiple payment options",
-        "Advanced SEO package",
-        "Inventory management",
-        "6 months support"
-      ]
-    },
-    {
-      name: "Premium Store",
-      price: "£4,500",
-      features: [
-        "Unlimited products",
-        "Premium custom design",
-        "Product comparison features",
-        "Multiple currency support",
-        "International shipping options",
-        "Full SEO package",
-        "Custom API integrations",
-        "12 months priority support"
-      ]
-    }
-  ],
-  "Healthcare": [
-    {
-      name: "Basic Practice",
-      price: "£2,000",
-      features: [
-        "Practice information pages",
-        "Staff/provider profiles",
-        "Responsive design",
-        "Contact forms",
-        "Location maps",
-        "HIPAA compliant forms",
-        "Basic SEO setup",
-        "3 months support"
-      ]
-    },
-    {
-      name: "Advanced Practice",
-      price: "£3,500",
-      popular: true,
-      features: [
-        "All Basic features",
-        "Online appointment booking",
-        "Patient education resources",
-        "Blog/news section",
-        "Newsletter integration",
-        "Advanced SEO package",
-        "Social media integration",
-        "6 months support"
-      ]
-    },
-    {
-      name: "Premium System",
-      price: "£5,000",
-      features: [
-        "All Advanced features",
-        "Patient portal",
-        "Secure messaging system",
-        "EMR/EHR integration",
-        "Telehealth capabilities",
-        "Custom API integrations",
-        "Performance analytics",
-        "12 months priority support"
-      ]
-    }
-  ],
-  "Real Estate": [
-    {
-      name: "Basic Realty",
-      price: "£1,800",
-      features: [
-        "Property listings (up to 50)",
-        "Agent profiles",
-        "Responsive design",
-        "Contact forms",
-        "Location maps",
-        "Basic search functionality",
-        "Basic SEO setup",
-        "3 months support"
-      ]
-    },
-    {
-      name: "Advanced Realty",
-      price: "£3,200",
-      popular: true,
-      features: [
-        "Property listings (up to 200)",
-        "IDX integration",
-        "Advanced property search",
-        "Lead capture forms",
-        "CRM integration",
-        "Advanced SEO package",
-        "Blog/market updates",
-        "6 months support"
-      ]
-    },
-    {
-      name: "Premium Realty",
-      price: "£4,800",
-      features: [
-        "Unlimited property listings",
-        "Virtual tours integration",
-        "Custom property filters",
-        "Mortgage calculator",
-        "Full MLS/IDX sync",
-        "Analytics dashboard",
-        "Email marketing integration",
-        "12 months priority support"
-      ]
-    }
-  ],
-  "Legal": [
-    {
-      name: "Basic Firm",
-      price: "£2,000",
-      features: [
-        "Firm overview",
-        "Attorney profiles",
-        "Practice areas",
-        "Responsive design",
-        "Contact forms",
-        "Location maps",
-        "Basic SEO setup",
-        "3 months support"
-      ]
-    },
-    {
-      name: "Advanced Firm",
-      price: "£3,500",
-      popular: true,
-      features: [
-        "All Basic features",
-        "Case studies/results",
-        "Testimonials section",
-        "Blog/resources section",
-        "Newsletter integration",
-        "Local SEO package",
-        "Social media integration",
-        "6 months support"
-      ]
-    },
-    {
-      name: "Premium Firm",
-      price: "£5,000",
-      features: [
-        "All Advanced features",
-        "Client portal",
-        "Document sharing system",
-        "Appointment scheduling",
-        "Marketing automation",
-        "Custom API integrations",
-        "Performance analytics",
-        "12 months priority support"
-      ]
-    }
-  ],
-  "Non-profit": [
-    {
-      name: "Basic Charity",
-      price: "£1,500",
-      features: [
-        "Organization overview",
-        "Mission & vision pages",
-        "Responsive design",
-        "Basic donation button",
-        "Contact forms",
-        "Social media links",
-        "Basic SEO setup",
-        "3 months support"
-      ]
-    },
-    {
-      name: "Advanced Charity",
-      price: "£3,000",
-      popular: true,
-      features: [
-        "All Basic features",
-        "Donation platform integration",
-        "Event calendar",
-        "Blog/success stories",
-        "Newsletter integration",
-        "Advanced SEO package",
-        "Email signup forms",
-        "6 months support"
-      ]
-    },
-    {
-      name: "Premium Charity",
-      price: "£4,500",
-      features: [
-        "All Advanced features",
-        "Member/donor portal",
-        "Volunteer management",
-        "Campaign pages",
-        "CRM integration",
-        "Custom API integrations",
-        "Performance analytics",
-        "12 months priority support"
-      ]
-    }
-  ]
-};
-
-const addOns = [
+const pricingPlans = [
   {
-    name: "Content Creation",
-    description: "Professional copywriting for your website (up to 10 pages)",
-    price: "£500"
+    name: "Basic",
+    description: "Perfect for small businesses just getting started online",
+    price: 1499,
+    duration: "one-time",
+    features: [
+      { name: "Responsive Website Design", included: true },
+      { name: "5 Custom Pages", included: true },
+      { name: "Contact Form", included: true },
+      { name: "Basic SEO Setup", included: true },
+      { name: "Social Media Integration", included: true },
+      { name: "Content Management System", included: true },
+      { name: "30 Days Support", included: true },
+      { name: "E-commerce Functionality", included: false },
+      { name: "Custom Functionality", included: false },
+      { name: "Performance Optimization", included: false }
+    ],
+    popular: false,
+    cta: "Get Started"
   },
   {
-    name: "Logo Design",
-    description: "Professional logo design with multiple concepts and revisions",
-    price: "£350"
+    name: "Professional",
+    description: "Ideal for growing businesses needing more features",
+    price: 2999,
+    duration: "one-time",
+    features: [
+      { name: "Responsive Website Design", included: true },
+      { name: "10 Custom Pages", included: true },
+      { name: "Contact Form", included: true },
+      { name: "Advanced SEO Setup", included: true },
+      { name: "Social Media Integration", included: true },
+      { name: "Content Management System", included: true },
+      { name: "90 Days Support", included: true },
+      { name: "E-commerce Functionality", included: true, limit: "Up to 50 products" },
+      { name: "Custom Functionality", included: false },
+      { name: "Performance Optimization", included: true }
+    ],
+    popular: true,
+    cta: "Most Popular"
   },
   {
-    name: "SEO Package",
-    description: "Comprehensive on-page and technical SEO optimization",
-    price: "£750"
-  },
-  {
-    name: "Social Media Integration",
-    description: "Connect your website to social platforms with sharing capabilities",
-    price: "£250"
-  },
-  {
-    name: "Custom API Integration",
-    description: "Connect third-party services to your website via API",
-    price: "£600+"
-  },
-  {
-    name: "Marketing Automation",
-    description: "Set up automated email marketing and lead nurturing",
-    price: "£800"
+    name: "Enterprise",
+    description: "Complete solution for established businesses with complex needs",
+    price: 5999,
+    duration: "one-time",
+    features: [
+      { name: "Responsive Website Design", included: true },
+      { name: "Unlimited Custom Pages", included: true },
+      { name: "Contact Form", included: true },
+      { name: "Advanced SEO Setup", included: true },
+      { name: "Social Media Integration", included: true },
+      { name: "Content Management System", included: true },
+      { name: "180 Days Support", included: true },
+      { name: "E-commerce Functionality", included: true, limit: "Unlimited products" },
+      { name: "Custom Functionality", included: true },
+      { name: "Performance Optimization", included: true }
+    ],
+    popular: false,
+    cta: "Contact Us"
   }
 ];
 
-const FAQs = [
+const maintenancePlans = [
   {
-    question: "How long does it take to build a website?",
-    answer: "Most of our projects are completed within 4-8 weeks, depending on the complexity and package chosen. E-commerce and custom web applications may take longer due to their complex functionality."
+    name: "Basic Care",
+    price: 79,
+    duration: "per month",
+    features: [
+      "Monthly Updates & Backups",
+      "Security Monitoring",
+      "Technical Support (9-5, M-F)",
+      "Basic Analytics Reports"
+    ]
   },
   {
-    question: "Do you offer hosting and maintenance?",
-    answer: "Yes, we offer optional hosting and maintenance packages for all our websites. These include regular updates, security monitoring, and technical support."
+    name: "Active Management",
+    price: 149,
+    duration: "per month",
+    features: [
+      "Weekly Updates & Backups",
+      "Enhanced Security & Monitoring",
+      "Priority Support (9-5, M-F)",
+      "Monthly Analytics Reports",
+      "2 Hours Content Updates"
+    ]
   },
   {
-    question: "Can I update the website myself after it's built?",
-    answer: "Absolutely! All our websites come with a content management system (CMS) that allows you to easily update content, add new pages, and manage your website without technical knowledge."
+    name: "Complete Care",
+    price: 299,
+    duration: "per month",
+    features: [
+      "Weekly Updates & Backups",
+      "Premium Security Suite",
+      "24/7 Emergency Support",
+      "Weekly Analytics Reports",
+      "5 Hours Content Updates",
+      "Performance Optimization"
+    ]
+  }
+];
+
+const faqs = [
+  {
+    question: "What is included in the website development cost?",
+    answer: "Our website development packages include design, development, testing, and deployment of your website. This includes responsive design, basic SEO optimization, and initial content setup based on the materials you provide."
   },
   {
-    question: "Do you offer custom designs or use templates?",
-    answer: "We create custom designs tailored to your brand and business needs. We don't use generic templates, ensuring your website stands out from competitors."
+    question: "How long does it take to develop a website?",
+    answer: "The timeline varies depending on the complexity of the project. A basic website typically takes 3-4 weeks, while more complex projects can take 8-12 weeks. We'll provide a specific timeline during our initial consultation."
   },
   {
-    question: "What payment methods do you accept?",
-    answer: "We accept bank transfers, credit/debit cards, and PayPal. We typically require a 50% deposit to begin work, with the remaining balance due upon project completion."
+    question: "Do I need to purchase hosting separately?",
+    answer: "Hosting is not included in our standard website development packages. However, we can recommend and help set up hosting based on your needs, or you can include it in a maintenance plan."
   },
   {
-    question: "Do you offer ongoing support after launch?",
-    answer: "Yes, all our packages include a support period (3-12 months depending on the package). After this period, you can purchase additional support or maintenance packages."
+    question: "Can I update the website myself after it's completed?",
+    answer: "Yes, all our websites come with a content management system (CMS) that allows you to update content. We provide training on how to use the CMS as part of the project delivery."
+  },
+  {
+    question: "Do you offer ongoing maintenance?",
+    answer: "Yes, we offer various maintenance plans to keep your website secure, updated, and performing optimally. These plans include regular updates, backups, security monitoring, and technical support."
+  },
+  {
+    question: "What if I need additional features later?",
+    answer: "We can always add features to your website after the initial build. We'll provide a quote for any additional development work based on your requirements."
   }
 ];
 
 const Pricing = () => {
-  const [selectedIndustry, setSelectedIndustry] = useState("E-commerce");
-  const [openFAQ, setOpenFAQ] = useState<number | null>(null);
-
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       <PageHeader 
-        title="Transparent Pricing" 
-        subtitle="Flat-rate packages with no hidden fees, tailored for your industry"
+        title="Pricing Plans" 
+        subtitle="Transparent pricing with no hidden fees"
       />
       <Breadcrumbs />
       
-      <section className="py-12">
+      <section className="py-16">
         <div className="container mx-auto px-6">
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
-            {industries.map((industry) => (
-              <Button 
-                key={industry}
-                variant={selectedIndustry === industry ? "default" : "outline"}
-                onClick={() => setSelectedIndustry(industry)}
-              >
-                {industry}
-              </Button>
-            ))}
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="bg-accent/10 text-accent px-4 py-1.5 rounded-full text-sm font-medium mb-6 inline-block">
+              Website Development
+            </span>
+            <h2 className="text-3xl font-bold mb-6">Choose the Perfect Plan for Your Business</h2>
+            <p className="text-gray-600">
+              Our straightforward pricing ensures you know exactly what you're getting. All plans include responsive design, 
+              SEO optimization, and a user-friendly content management system.
+            </p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {pricingPlans[selectedIndustry as keyof typeof pricingPlans].map((plan, index) => (
-              <Card 
-                key={index} 
-                className={`hover-card relative ${plan.popular ? 'border-accent shadow-lg' : ''}`}
-              >
+            {pricingPlans.map((plan, index) => (
+              <Card key={index} className={`relative hover-card overflow-hidden ${plan.popular ? 'border-accent shadow-xl' : 'border-gray-200'}`}>
                 {plan.popular && (
-                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-accent text-white px-4 py-1 rounded-full text-sm font-medium">
+                  <div className="absolute top-0 right-0 bg-accent text-white px-4 py-1 text-xs font-medium">
                     Most Popular
                   </div>
                 )}
-                <CardHeader>
-                  <CardTitle className="flex justify-between items-center">
-                    <span>{plan.name}</span>
-                    <span className="text-2xl">{plan.price}</span>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3">
-                    {plan.features.map((feature, i) => (
-                      <li key={i} className="flex items-start">
-                        <CheckCircle2 className="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
-                        <span>{feature}</span>
-                      </li>
+                <CardContent className="p-6 pt-10">
+                  <div className="text-center mb-6">
+                    <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
+                    <p className="text-gray-600 mb-6">{plan.description}</p>
+                    <div className="flex justify-center items-baseline mb-4">
+                      <span className="text-4xl font-bold">${plan.price}</span>
+                      <span className="text-gray-500 ml-2">{plan.duration}</span>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    {plan.features.map((feature, featureIndex) => (
+                      <div key={featureIndex} className="flex items-center">
+                        {feature.included ? (
+                          <Check className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
+                        ) : (
+                          <X className="h-5 w-5 text-gray-300 mr-3 flex-shrink-0" />
+                        )}
+                        <span className={`${!feature.included ? 'text-gray-400' : ''}`}>
+                          {feature.name}
+                          {feature.limit && (
+                            <TooltipProvider>
+                              <Tooltip>
+                                <TooltipTrigger asChild>
+                                  <HelpCircle className="h-4 w-4 inline ml-1 text-gray-400" />
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                  <p>{feature.limit}</p>
+                                </TooltipContent>
+                              </Tooltip>
+                            </TooltipProvider>
+                          )}
+                        </span>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </CardContent>
-                <CardFooter>
-                  <Button className="w-full" variant={plan.popular ? "default" : "outline"} asChild>
-                    <Link to="/contact" className="flex items-center justify-center gap-2">
-                      Get Started <ArrowRight size={16} />
-                    </Link>
-                  </Button>
+                <CardFooter className="p-6 pt-0">
+                  <Link to="/contact" className="w-full">
+                    <Button 
+                      className={`w-full ${plan.popular ? '' : 'bg-gray-700 hover:bg-gray-800'}`}
+                      size="lg"
+                    >
+                      {plan.cta}
+                    </Button>
+                  </Link>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
+          
+          <div className="mt-12 text-center">
+            <p className="text-gray-600 mb-8">
+              Need a custom solution? We offer tailored packages for specific industry needs.
+            </p>
+            <Link to="/contact">
+              <Button variant="outline" size="lg">
+                Get a Custom Quote
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+      
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-6">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="bg-accent/10 text-accent px-4 py-1.5 rounded-full text-sm font-medium mb-6 inline-block">
+              Maintenance & Support
+            </span>
+            <h2 className="text-3xl font-bold mb-6">Keep Your Website Running Smoothly</h2>
+            <p className="text-gray-600">
+              Our maintenance plans ensure your website stays secure, up-to-date, and performing at its best.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {maintenancePlans.map((plan, index) => (
+              <Card key={index} className="hover-card">
+                <CardContent className="p-6">
+                  <div className="text-center mb-6">
+                    <h3 className="text-xl font-bold mb-2">{plan.name}</h3>
+                    <div className="flex justify-center items-baseline mb-6">
+                      <span className="text-3xl font-bold">${plan.price}</span>
+                      <span className="text-gray-500 ml-2">{plan.duration}</span>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-3">
+                    {plan.features.map((feature, featureIndex) => (
+                      <div key={featureIndex} className="flex items-center">
+                        <Check className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
+                        <span>{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+                <CardFooter className="p-6 pt-0">
+                  <Link to="/contact" className="w-full">
+                    <Button variant="outline" className="w-full">
+                      Select Plan
+                    </Button>
+                  </Link>
                 </CardFooter>
               </Card>
             ))}
@@ -367,103 +285,37 @@ const Pricing = () => {
         </div>
       </section>
       
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-6">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <h2 className="text-3xl font-bold mb-4">Optional Add-ons</h2>
-            <p className="text-gray-600">
-              Enhance your website with these additional services, available with any package.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {addOns.map((addon, index) => (
-              <div key={index} className="bg-white p-6 rounded-xl shadow-sm border hover:shadow-md transition-shadow">
-                <div className="flex justify-between items-start mb-3">
-                  <h3 className="text-lg font-bold">{addon.name}</h3>
-                  <span className="text-accent font-medium">{addon.price}</span>
-                </div>
-                <p className="text-gray-600">{addon.description}</p>
-              </div>
-            ))}
-          </div>
-          
-          <div className="text-center mt-10">
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button variant="outline">View All Add-ons</Button>
-              </DialogTrigger>
-              <DialogContent className="max-w-3xl">
-                <DialogHeader>
-                  <DialogTitle>Complete Add-on Services</DialogTitle>
-                  <DialogDescription>
-                    Customize your project with these additional services
-                  </DialogDescription>
-                </DialogHeader>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                  {addOns.concat(addOns).map((addon, index) => (
-                    <div key={index} className="bg-gray-50 p-4 rounded-lg">
-                      <div className="flex justify-between items-start mb-2">
-                        <h3 className="font-medium">{addon.name}</h3>
-                        <span className="text-accent">{addon.price}</span>
-                      </div>
-                      <p className="text-sm text-gray-600">{addon.description}</p>
-                    </div>
-                  ))}
-                </div>
-              </DialogContent>
-            </Dialog>
-          </div>
-        </div>
-      </section>
-      
       <section className="py-16">
         <div className="container mx-auto px-6">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <h2 className="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="bg-accent/10 text-accent px-4 py-1.5 rounded-full text-sm font-medium mb-6 inline-block">
+              FAQs
+            </span>
+            <h2 className="text-3xl font-bold mb-6">Frequently Asked Questions</h2>
             <p className="text-gray-600">
-              Find answers to common questions about our services and process.
+              Find answers to commonly asked questions about our pricing and services.
             </p>
           </div>
           
-          <div className="max-w-3xl mx-auto divide-y">
-            {FAQs.map((faq, index) => (
-              <div key={index} className="py-5">
-                <button
-                  className="flex justify-between items-center w-full text-left font-medium"
-                  onClick={() => setOpenFAQ(openFAQ === index ? null : index)}
-                >
-                  <span>{faq.question}</span>
-                  <span className="transform transition-transform">
-                    {openFAQ === index ? 
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
-                      </svg> : 
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                      </svg>
-                    }
-                  </span>
-                </button>
-                <div className={`mt-2 ${openFAQ === index ? 'block' : 'hidden'}`}>
-                  <p className="text-gray-600">{faq.answer}</p>
-                </div>
+          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+            {faqs.map((faq, index) => (
+              <div key={index} className="space-y-2">
+                <h3 className="text-lg font-semibold">{faq.question}</h3>
+                <p className="text-gray-600">{faq.answer}</p>
               </div>
             ))}
           </div>
-        </div>
-      </section>
-      
-      <section className="py-16 bg-accent text-white">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-6">Need a Custom Solution?</h2>
-          <p className="text-white/80 max-w-2xl mx-auto mb-8">
-            Our packages are designed to fit most needs, but we understand that every business is unique.
-            Contact us for a custom quote tailored to your specific requirements.
-          </p>
-          <Button className="bg-white text-accent hover:bg-white/90" size="lg" asChild>
-            <Link to="/contact">Request Custom Quote</Link>
-          </Button>
+          
+          <div className="mt-16 text-center">
+            <p className="text-gray-600 mb-8">
+              Have more questions? We're here to help!
+            </p>
+            <Link to="/contact">
+              <Button size="lg">
+                Contact Us
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
       
