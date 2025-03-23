@@ -5,7 +5,7 @@ import PageHeader from "@/components/layout/PageHeader";
 import Breadcrumbs from "@/components/layout/Breadcrumbs";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Code, Paintbrush, ShoppingCart, BarChart, Smartphone, Globe, GraduationCap, Heart, HeartPulse } from "lucide-react";
+import { Code, Paintbrush, ShoppingCart, BarChart, Smartphone, Globe, GraduationCap, Heart, HeartPulse, Scale, Home, Dumbbell } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const services = [
@@ -138,6 +138,51 @@ const services = [
     ],
     cta: "Get Support",
     link: "/contact"
+  },
+  {
+    title: "Law Firm Websites",
+    description: "Professional, trust-building legal websites with GDPR compliance, client portals, and case management integration.",
+    icon: Scale,
+    features: [
+      "GDPR-compliant client handling",
+      "Secure document sharing",
+      "Case management integration",
+      "Practice area content structure",
+      "Appointment scheduling"
+    ],
+    cta: "Learn More",
+    link: "/services/law-firm-development",
+    highlighted: true
+  },
+  {
+    title: "Real Estate Websites & Apps",
+    description: "Custom property portals and estate agent websites with advanced search, virtual tours, and mobile applications.",
+    icon: Home,
+    features: [
+      "Property search functionality",
+      "Interactive maps and location tools",
+      "Virtual tours and 360° views",
+      "Agent portals and dashboards",
+      "Property management integration"
+    ],
+    cta: "Learn More",
+    link: "/services/real-estate-development",
+    highlighted: true
+  },
+  {
+    title: "Fitness Trainer Websites",
+    description: "Digital platforms for personal trainers and coaches with booking systems, membership management, and workout delivery.",
+    icon: Dumbbell,
+    features: [
+      "Online class booking",
+      "Virtual training delivery",
+      "Membership management",
+      "Client progress tracking",
+      "Performance analytics"
+    ],
+    cta: "Learn More",
+    link: "/services/fitness-development",
+    highlighted: true
   }
 ];
 

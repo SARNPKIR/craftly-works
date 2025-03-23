@@ -48,7 +48,7 @@ const pricingPlans = [
       { name: "Advanced SEO Setup", included: true },
       { name: "Social Media Integration", included: true },
       { name: "Content Management System", included: true },
-      { name: "90 Days Support", included: true },
+      { name: "one year Full Support with updates and Website Maintenance", included: true },
       { name: "E-commerce Functionality", included: true, limit: "Up to 50 products" },
       { name: "Custom Functionality", included: false },
       { name: "Performance Optimization", included: true }
@@ -68,7 +68,7 @@ const pricingPlans = [
       { name: "Advanced SEO Setup", included: true },
       { name: "Social Media Integration", included: true },
       { name: "Content Management System", included: true },
-      { name: "180 Days Support", included: true },
+      { name: "363 Days Full Website Support", included: true },
       { name: "E-commerce Functionality", included: true, limit: "Unlimited products" },
       { name: "Custom Functionality", included: true },
       { name: "Performance Optimization", included: true }

@@ -110,14 +110,14 @@ const NonprofitDevelopment = () => {
               </div>
               <Link to="/contact">
                 <Button size="lg" className="rounded-full">
-                  Get Your Non-profit Website from £500
+                  Get Your Non-profit Website starting from £500
                 </Button>
               </Link>
             </div>
             
             <div className="relative rounded-2xl overflow-hidden shadow-xl">
               <img 
-                src="https://images.unsplash.com/photo-1565801255789-85bf5d4a5f8f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" 
+                src="images/nonprofit-development.jpg" 
                 alt="Non-profit and charity website development for UK organizations" 
                 className="w-full h-auto"
                 width="600"

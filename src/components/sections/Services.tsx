@@ -54,7 +54,7 @@ const services = [
     title: 'Non-profit & Charity Websites',
     description: 'Impactful websites that tell your story, engage supporters, and facilitate donations.',
     icon: Building,
-    price: '£1,500',
+    price: '£500',
     features: ['Donation Systems', 'Event Management', 'Volunteer Signup', 'Impact Reporting'],
     color: 'from-purple-500 to-violet-500',
   },

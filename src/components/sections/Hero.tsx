@@ -1,6 +1,6 @@
-
 import { ArrowRight } from 'lucide-react';
 import AnimatedGradient from '../ui/AnimatedGradient';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   return (
@@ -35,20 +35,29 @@ const Hero = () => {
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in opacity-0" 
               style={{ animationDelay: '0.8s', animationFillMode: 'forwards' }}
             >
-              <a 
-                href="#contact" 
+              <Link 
+                to="/contact" 
                 className="inline-flex items-center justify-center px-6 py-3 bg-accent text-white rounded-full text-base font-medium hover:bg-accent/90 transition-colors shadow-md hover:shadow-lg"
               >
                 Request Free Quote
-              </a>
+              </Link>
               
-              <a 
-                href="#services" 
+              <Link 
+                to="/services" 
                 className="inline-flex items-center justify-center px-6 py-3 bg-white text-accent rounded-full text-base font-medium hover:bg-gray-100 transition-colors border border-gray-200 shadow-sm hover:shadow-md group"
               >
                 Our Services 
                 <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
-              </a>
+              </Link>
+            </div>
+            
+            <div className="mt-8 grid grid-cols-2 gap-2 lg:flex lg:flex-wrap animate-fade-in opacity-0" style={{ animationDelay: '1s', animationFillMode: 'forwards' }}>
+              <Link to="/services/ecommerce-development" className="text-sm text-gray-700 hover:text-accent hover:underline transition-colors">E-commerce</Link>
+              <Link to="/services/healthcare-development" className="text-sm text-gray-700 hover:text-accent hover:underline transition-colors">Healthcare</Link>
+              <Link to="/services/educational-development" className="text-sm text-gray-700 hover:text-accent hover:underline transition-colors">Educational</Link>
+              <Link to="/services/law-firm-development" className="text-sm text-gray-700 hover:text-accent hover:underline transition-colors">Law Firms</Link>
+              <Link to="/services/real-estate-development" className="text-sm text-gray-700 hover:text-accent hover:underline transition-colors">Real Estate</Link>
+              <Link to="/services/fitness-development" className="text-sm text-gray-700 hover:text-accent hover:underline transition-colors">Fitness</Link>
             </div>
           </div>
           
@@ -61,8 +70,8 @@ const Hero = () => {
             >
               <div className="glass-card rounded-2xl overflow-hidden shadow-xl p-1.5 transition-all duration-500 animate-float">
                 <img 
-                  src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
-                  alt="Web Development" 
+                  src="/services/images/Uk-Fast-and-Speedy Solutions.jpg" 
+                  alt="UK Web Development" 
                   className="w-full h-auto rounded-xl object-cover"
                 />
               </div>
