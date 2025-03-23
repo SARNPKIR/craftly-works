@@ -17,6 +17,8 @@ import TermsOfService from "./pages/TermsOfService";
 import CookiePolicy from "./pages/CookiePolicy";
 import EcommerceDevelopment from "./pages/EcommerceDevelopment";
 import HealthcareDevelopment from "./pages/HealthcareDevelopment";
+import EducationalDevelopment from "./pages/EducationalDevelopment";
+import NonprofitDevelopment from "./pages/NonprofitDevelopment";
 import CookieConsent from "./components/ui/CookieConsent";
 
 const queryClient = new QueryClient();
@@ -33,6 +35,8 @@ const App = () => (
           <Route path="/services" element={<Services />} />
           <Route path="/services/ecommerce-development" element={<EcommerceDevelopment />} />
           <Route path="/services/healthcare-development" element={<HealthcareDevelopment />} />
+          <Route path="/services/educational-development" element={<EducationalDevelopment />} />
+          <Route path="/services/nonprofit-development" element={<NonprofitDevelopment />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/pricing" element={<Pricing />} />

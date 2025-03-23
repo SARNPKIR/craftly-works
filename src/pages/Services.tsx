@@ -5,7 +5,7 @@ import PageHeader from "@/components/layout/PageHeader";
 import Breadcrumbs from "@/components/layout/Breadcrumbs";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Code, Paintbrush, ShoppingCart, BarChart, Smartphone, Globe, GraduationCap, Heart } from "lucide-react";
+import { Code, Paintbrush, ShoppingCart, BarChart, Smartphone, Globe, GraduationCap, Heart, HeartPulse } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const services = [
@@ -41,7 +41,7 @@ const services = [
   {
     title: "Healthcare Websites & Apps",
     description: "GDPR-compliant digital solutions for medical practices, clinics, and telehealth providers with secure patient portals.",
-    icon: Heart,
+    icon: HeartPulse,
     features: [
       "GDPR & HIPAA compliance",
       "Secure patient portals",
@@ -59,13 +59,29 @@ const services = [
     icon: GraduationCap,
     features: [
       "Course creation tools",
-      "Student dashboards & progress tracking",
-      "Assessment & quiz functionality",
+      "Student dashboards",
+      "Assessment functionality",
       "Payment integration",
       "Certification generation"
     ],
-    cta: "Build Your Learning Platform",
-    link: "/contact"
+    cta: "Learn More",
+    link: "/services/educational-development",
+    highlighted: true
+  },
+  {
+    title: "Non-profit & Charity Websites",
+    description: "Affordable website solutions for charities and non-profits with donation systems and volunteer management tools.",
+    icon: Heart,
+    features: [
+      "Donation processing",
+      "Volunteer management",
+      "Event promotion",
+      "Impact storytelling",
+      "Starting from £500"
+    ],
+    cta: "Learn More",
+    link: "/services/nonprofit-development",
+    highlighted: true
   },
   {
     title: "Web Application Development",
