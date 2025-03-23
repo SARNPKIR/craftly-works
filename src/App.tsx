@@ -23,40 +23,43 @@ import LawFirmDevelopment from "./pages/LawFirmDevelopment";
 import RealEstateDevelopment from "./pages/RealEstateDevelopment";
 import FitnessDevelopment from "./pages/FitnessDevelopment";
 import CookieConsent from "./components/ui/CookieConsent";
+import ErrorBoundary from "./components/ui/ErrorBoundary";
 
 const queryClient = new QueryClient();
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/services/ecommerce-development" element={<EcommerceDevelopment />} />
-          <Route path="/services/healthcare-development" element={<HealthcareDevelopment />} />
-          <Route path="/services/educational-development" element={<EducationalDevelopment />} />
-          <Route path="/services/nonprofit-development" element={<NonprofitDevelopment />} />
-          <Route path="/services/law-firm-development" element={<LawFirmDevelopment />} />
-          <Route path="/services/real-estate-development" element={<RealEstateDevelopment />} />
-          <Route path="/services/fitness-development" element={<FitnessDevelopment />} />
-          <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/pricing" element={<Pricing />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/terms-of-service" element={<TermsOfService />} />
-          <Route path="/cookie-policy" element={<CookiePolicy />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        <CookieConsent />
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+  <ErrorBoundary>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/services/ecommerce-development" element={<EcommerceDevelopment />} />
+            <Route path="/services/healthcare-development" element={<HealthcareDevelopment />} />
+            <Route path="/services/educational-development" element={<EducationalDevelopment />} />
+            <Route path="/services/nonprofit-development" element={<NonprofitDevelopment />} />
+            <Route path="/services/law-firm-development" element={<LawFirmDevelopment />} />
+            <Route path="/services/real-estate-development" element={<RealEstateDevelopment />} />
+            <Route path="/services/fitness-development" element={<FitnessDevelopment />} />
+            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
+            <Route path="/cookie-policy" element={<CookiePolicy />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          <CookieConsent />
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  </ErrorBoundary>
 );
 
 export default App;

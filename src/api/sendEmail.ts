@@ -1,5 +1,4 @@
-import nodemailer from 'nodemailer';
-
+// Define the interface for email data
 export interface EmailData {
   name: string;
   email: string;
@@ -20,85 +19,41 @@ const serviceMap: Record<string, string> = {
   other: 'Other Services'
 };
 
+/**
+ * Frontend email sending function - in a production environment, 
+ * this would send the data to a backend API endpoint.
+ * For now, we'll simulate a successful send.
+ */
 export const sendEmail = async (data: EmailData): Promise<void> => {
   const { name, email, phone, company, service, message } = data;
-  
-  // Get SMTP configuration from environment variables
-  const host = import.meta.env.VITE_SMTP_HOST;
-  const port = import.meta.env.VITE_SMTP_PORT;
-  const user = import.meta.env.VITE_SMTP_USER;
-  const pass = import.meta.env.VITE_SMTP_PASS;
-  const emailTo = import.meta.env.VITE_EMAIL_TO;
-  
-  // Validate SMTP configuration
-  if (!host || !port || !user || !pass || !emailTo) {
-    console.error('Missing SMTP configuration');
-    throw new Error('Email service is not configured properly. Please contact the administrator.');
-  }
-  
-  // Create email transporter
-  const transporter = nodemailer.createTransport({
-    host,
-    port: parseInt(port),
-    secure: false, // true for 465, false for other ports
-    auth: {
-      user,
-      pass
-    }
-  });
   
   // Format service name
   const serviceName = serviceMap[service] || 'Not specified';
   
-  // Format phone number (or provide a placeholder if empty)
-  const phoneDisplay = phone || 'Not provided';
+  // Log the email data for demonstration purposes
+  console.log('Email would be sent with:', {
+    name,
+    email,
+    phone: phone || 'Not provided',
+    company: company || 'Not provided',
+    service: serviceName,
+    message
+  });
   
-  // Format company name (or provide a placeholder if empty)
-  const companyDisplay = company || 'Not provided';
+  // Simulate API call delay
+  await new Promise(resolve => setTimeout(resolve, 1500));
   
-  // Create HTML content for the email
-  const htmlContent = `
-    <h2>New Contact Form Submission</h2>
-    <p><strong>Name:</strong> ${name}</p>
-    <p><strong>Email:</strong> ${email}</p>
-    <p><strong>Phone:</strong> ${phoneDisplay}</p>
-    <p><strong>Company:</strong> ${companyDisplay}</p>
-    <p><strong>Service:</strong> ${serviceName}</p>
-    <h3>Message:</h3>
-    <p>${message.replace(/\n/g, '<br>')}</p>
-  `;
+  // In a real implementation, we would make an API call to a server endpoint:
+  // const response = await fetch('/api/send-email', {
+  //   method: 'POST',
+  //   headers: { 'Content-Type': 'application/json' },
+  //   body: JSON.stringify(data)
+  // });
+  // 
+  // if (!response.ok) {
+  //   throw new Error('Failed to send message');
+  // }
   
-  // Create plain text content for email clients that don't support HTML
-  const textContent = `
-    New Contact Form Submission
-    
-    Name: ${name}
-    Email: ${email}
-    Phone: ${phoneDisplay}
-    Company: ${companyDisplay}
-    Service: ${serviceName}
-    
-    Message:
-    ${message}
-  `;
-  
-  // Set up email details
-  const mailOptions = {
-    from: `"BMCrafts Website" <${user}>`,
-    to: emailTo,
-    replyTo: email,
-    subject: `New Contact Form: ${serviceName} Inquiry from ${name}`,
-    text: textContent,
-    html: htmlContent
-  };
-  
-  try {
-    // Send email
-    const info = await transporter.sendMail(mailOptions);
-    console.log('Email sent successfully:', info.messageId);
-    return;
-  } catch (error) {
-    console.error('Error sending email:', error);
-    throw new Error('Failed to send your message. Please try again later.');
-  }
+  // For demonstration, we'll just simulate a successful send
+  return;
 }; 
