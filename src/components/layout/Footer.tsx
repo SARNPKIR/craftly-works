@@ -1,5 +1,5 @@
-
 import { Facebook, Instagram, Twitter, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -41,11 +41,11 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Company</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-600 hover:text-accent transition-colors">About</a></li>
+              <li><Link to="/about" className="text-gray-600 hover:text-accent transition-colors">About</Link></li>
               <li><a href="#" className="text-gray-600 hover:text-accent transition-colors">Case Studies</a></li>
-              <li><a href="#" className="text-gray-600 hover:text-accent transition-colors">Blog</a></li>
+              <li><Link to="/blog" className="text-gray-600 hover:text-accent transition-colors">Blog</Link></li>
               <li><a href="#" className="text-gray-600 hover:text-accent transition-colors">Careers</a></li>
-              <li><a href="#" className="text-gray-600 hover:text-accent transition-colors">Contact</a></li>
+              <li><Link to="/contact" className="text-gray-600 hover:text-accent transition-colors">Contact</Link></li>
             </ul>
           </div>
           
@@ -73,9 +73,9 @@ const Footer = () => {
             © {new Date().getFullYear()} BMCrafts. All rights reserved.
           </p>
           <div className="flex space-x-6">
-            <a href="#" className="text-gray-500 hover:text-accent text-sm transition-colors">Privacy Policy</a>
-            <a href="#" className="text-gray-500 hover:text-accent text-sm transition-colors">Terms of Service</a>
-            <a href="#" className="text-gray-500 hover:text-accent text-sm transition-colors">Cookie Policy</a>
+            <Link to="/privacy-policy" className="text-gray-500 hover:text-accent text-sm transition-colors">Privacy Policy</Link>
+            <Link to="/terms-of-service" className="text-gray-500 hover:text-accent text-sm transition-colors">Terms of Service</Link>
+            <Link to="/cookie-policy" className="text-gray-500 hover:text-accent text-sm transition-colors">Cookie Policy</Link>
           </div>
         </div>
       </div>

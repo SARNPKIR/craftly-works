@@ -1,4 +1,3 @@
-
 import { useLocation } from "react-router-dom";
 import { 
   Breadcrumb, 
@@ -14,6 +13,12 @@ const Breadcrumbs = () => {
   const pathnames = location.pathname.split('/').filter((x) => x);
 
   const formatPathname = (pathname: string) => {
+    // Format special paths with hyphens
+    if (pathname.includes('-')) {
+      return pathname.split('-').map(word => 
+        word.charAt(0).toUpperCase() + word.slice(1)
+      ).join(' ');
+    }
     return pathname.charAt(0).toUpperCase() + pathname.slice(1);
   };
 

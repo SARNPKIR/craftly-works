@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
@@ -129,7 +128,7 @@ const Navbar = () => {
             mobileNavOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
           )}
         >
-          <div className="flex flex-col items-center justify-center h-full space-y-8 p-6">
+          <div className="flex flex-col items-center justify-center h-full space-y-6 p-6 pt-24">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
