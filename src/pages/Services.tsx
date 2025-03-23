@@ -1,4 +1,3 @@
-
 import React from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -6,7 +5,7 @@ import PageHeader from "@/components/layout/PageHeader";
 import Breadcrumbs from "@/components/layout/Breadcrumbs";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Code, Paintbrush, ShoppingCart, BarChart, Smartphone, Globe, GraduationCap } from "lucide-react";
+import { Code, Paintbrush, ShoppingCart, BarChart, Smartphone, Globe, GraduationCap, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const services = [
@@ -21,7 +20,8 @@ const services = [
       "SEO-optimized structure",
       "Performance optimization"
     ],
-    cta: "Get a Website Quote"
+    cta: "Get a Website Quote",
+    link: "/contact"
   },
   {
     title: "E-commerce Solutions",
@@ -34,7 +34,24 @@ const services = [
       "Customer accounts",
       "Order tracking"
     ],
-    cta: "Build Your Store"
+    cta: "Learn More",
+    link: "/services/ecommerce-development",
+    highlighted: true
+  },
+  {
+    title: "Healthcare Websites & Apps",
+    description: "GDPR-compliant digital solutions for medical practices, clinics, and telehealth providers with secure patient portals.",
+    icon: Heart,
+    features: [
+      "GDPR & HIPAA compliance",
+      "Secure patient portals",
+      "EHR/EMR integration",
+      "Appointment scheduling",
+      "Telehealth capabilities"
+    ],
+    cta: "Learn More",
+    link: "/services/healthcare-development",
+    highlighted: true
   },
   {
     title: "Educational Course Websites & LMS",
@@ -47,7 +64,8 @@ const services = [
       "Payment integration",
       "Certification generation"
     ],
-    cta: "Build Your Learning Platform"
+    cta: "Build Your Learning Platform",
+    link: "/contact"
   },
   {
     title: "Web Application Development",
@@ -60,7 +78,8 @@ const services = [
       "Real-time functionality",
       "Secure data handling"
     ],
-    cta: "Discuss Your App"
+    cta: "Discuss Your App",
+    link: "/contact"
   },
   {
     title: "Digital Marketing",
@@ -73,7 +92,8 @@ const services = [
       "Email marketing campaigns",
       "Analytics & reporting"
     ],
-    cta: "Grow Your Reach"
+    cta: "Grow Your Reach",
+    link: "/contact"
   },
   {
     title: "Mobile App Development",
@@ -86,7 +106,8 @@ const services = [
       "App store optimization",
       "Push notifications"
     ],
-    cta: "Create Your App"
+    cta: "Create Your App",
+    link: "/contact"
   },
   {
     title: "Maintenance & Support",
@@ -99,7 +120,8 @@ const services = [
       "Technical support",
       "Monitoring & backups"
     ],
-    cta: "Get Support"
+    cta: "Get Support",
+    link: "/contact"
   }
 ];
 
@@ -117,7 +139,7 @@ const Services = () => {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
-              <Card key={index} className="hover-card border-none shadow-lg overflow-hidden">
+              <Card key={index} className={`hover-card border-none shadow-lg overflow-hidden ${service.highlighted ? 'ring-2 ring-accent/20' : ''}`}>
                 <CardContent className="p-0">
                   <div className="p-6 border-b">
                     <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-accent mb-4">
@@ -138,8 +160,10 @@ const Services = () => {
                       ))}
                     </ul>
                     
-                    <Link to="/contact">
-                      <Button className="w-full">{service.cta}</Button>
+                    <Link to={service.link}>
+                      <Button className={`w-full ${service.highlighted ? 'bg-accent hover:bg-accent/90' : ''}`}>
+                        {service.cta}
+                      </Button>
                     </Link>
                   </div>
                 </CardContent>
