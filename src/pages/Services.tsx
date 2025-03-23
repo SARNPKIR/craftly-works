@@ -6,7 +6,7 @@ import PageHeader from "@/components/layout/PageHeader";
 import Breadcrumbs from "@/components/layout/Breadcrumbs";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Code, Paintbrush, ShoppingCart, BarChart, Smartphone, Globe } from "lucide-react";
+import { Code, Paintbrush, ShoppingCart, BarChart, Smartphone, Globe, GraduationCap } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const services = [
@@ -35,6 +35,19 @@ const services = [
       "Order tracking"
     ],
     cta: "Build Your Store"
+  },
+  {
+    title: "Educational Course Websites & LMS",
+    description: "Custom learning platforms and Learning Management Systems for educational institutions, trainers, and organizations.",
+    icon: GraduationCap,
+    features: [
+      "Course creation tools",
+      "Student dashboards & progress tracking",
+      "Assessment & quiz functionality",
+      "Payment integration",
+      "Certification generation"
+    ],
+    cta: "Build Your Learning Platform"
   },
   {
     title: "Web Application Development",

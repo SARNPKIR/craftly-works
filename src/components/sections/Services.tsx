@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { ShoppingCart, Heart, Home, Scale, Building, ArrowRight } from 'lucide-react';
+import { ShoppingCart, Heart, Home, Scale, Building, ArrowRight, GraduationCap } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const services = [
@@ -21,6 +21,15 @@ const services = [
     price: '£2,000',
     features: ['HIPAA Compliance', 'Patient Portals', 'Appointment Booking', 'Medical Records'],
     color: 'from-red-500 to-pink-500',
+  },
+  {
+    id: 'education',
+    title: 'Educational Course Websites & LMS',
+    description: 'Custom learning platforms for educational institutions, trainers, and organizations with robust course management.',
+    icon: GraduationCap,
+    price: '£2,500',
+    features: ['Course Creation Tools', 'Student Dashboards', 'Progress Tracking', 'Assessment Tools'],
+    color: 'from-violet-500 to-purple-500',
   },
   {
     id: 'realestate',

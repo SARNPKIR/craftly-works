@@ -241,6 +241,7 @@ const Contact = () => {
                         <option value="default" disabled>Select a service</option>
                         <option value="ecommerce">E-commerce Development</option>
                         <option value="healthcare">Healthcare Website/App</option>
+                        <option value="education">Educational Course Websites & LMS</option>
                         <option value="realestate">Real Estate Website/App</option>
                         <option value="lawfirm">Law Firm Website</option>
                         <option value="nonprofit">Non-profit Website</option>
