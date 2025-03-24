@@ -13,6 +13,7 @@ const Navbar = () => {
   const location = useLocation();
   const { theme } = useTheme();
 
+  // Handle scroll detection
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -22,36 +23,24 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Disable body scroll when mobile menu is open
+  // Handle body scroll locking when mobile menu is open
   useEffect(() => {
     if (mobileNavOpen) {
-      // Save the current scroll position
-      const scrollY = window.scrollY;
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollY}px`;
+      document.body.classList.add('overflow-hidden', 'fixed', 'inset-x-0');
+      document.body.style.top = `-${window.scrollY}px`;
       document.body.style.width = '100%';
-      document.body.style.overflowY = 'hidden';
     } else {
-      // Restore scroll position when closing the menu
       const scrollY = document.body.style.top;
-      document.body.style.position = '';
+      document.body.classList.remove('overflow-hidden', 'fixed', 'inset-x-0');
       document.body.style.top = '';
       document.body.style.width = '';
-      document.body.style.overflowY = '';
       if (scrollY) {
         window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
       }
     }
-    return () => {
-      // Cleanup to ensure body scrolling is restored
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
-      document.body.style.overflowY = '';
-    };
   }, [mobileNavOpen]);
 
-  // Close mobile menu when location changes
+  // Close mobile menu when route changes
   useEffect(() => {
     setMobileNavOpen(false);
   }, [location.pathname]);
@@ -66,13 +55,10 @@ const Navbar = () => {
     { name: 'Contact', href: '/contact' },
   ];
 
-  const isActive = (path: string) => {
-    return location.pathname === path;
-  };
+  const isActive = (path: string) => location.pathname === path;
 
   // Determine text color based on scroll position, dark mode, and mobile nav state
   const getTextColor = () => {
-    if (mobileNavOpen) return "text-foreground";
     if (isScrolled) return "text-foreground";
     
     // On hero sections where background might be dark/image
@@ -83,162 +69,130 @@ const Navbar = () => {
     return "text-foreground";
   };
 
-  // Update the link click handler to force scroll to the top
+  // Handle link click and force scroll to top
   const handleLinkClick = () => {
-    // Close mobile nav if open
     setMobileNavOpen(false);
-
-    // Force immediate scroll to top
-    const forceScrollToTop = () => {
-      window.scrollTo(0, 0);
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-    };
-
-    // Execute immediately
-    forceScrollToTop();
-    
-    // Also execute in the next frame and after a delay
-    requestAnimationFrame(forceScrollToTop);
-    setTimeout(forceScrollToTop, 50);
+    window.scrollTo(0, 0);
   };
 
   return (
-    <header
-      className={cn(
-        'fixed top-0 w-full z-50 transition-all duration-300 ease-in-out min-h-[80px] flex items-center',
-        isScrolled || theme === "dark"
-          ? 'bg-background/95 backdrop-blur-md border-b border-border'
-          : location.pathname === "/"
-            ? 'bg-transparent'
-            : 'bg-background/95 backdrop-blur-md border-b border-border'
-      )}
-    >
-      <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
-        <Link 
-          to="/" 
-          className="text-2xl font-bold tracking-tight transition-all duration-300 z-10"
-          onClick={handleLinkClick}
-        >
-          <span className={cn(
-            "font-bold transition-colors",
-            getTextColor()
-          )}>
-            BM<span className="text-accent">Crafts</span>
-          </span>
-        </Link>
+    <>
+      <header
+        className={cn(
+          'fixed top-0 w-full z-40 transition-all duration-300 ease-in-out min-h-[80px] flex items-center',
+          isScrolled || theme === "dark"
+            ? 'bg-background/95 backdrop-blur-md border-b border-border'
+            : location.pathname === "/"
+              ? 'bg-transparent'
+              : 'bg-background/95 backdrop-blur-md border-b border-border'
+        )}
+      >
+        <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
+          <Link 
+            to="/" 
+            className="text-2xl font-bold tracking-tight transition-all duration-300 z-10"
+            onClick={handleLinkClick}
+          >
+            <span className={cn(
+              "font-bold transition-colors",
+              getTextColor()
+            )}>
+              BM<span className="text-accent">Crafts</span>
+            </span>
+          </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-6">
-          {navLinks.map((link) => (
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex space-x-6">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                to={link.href}
+                className={cn(
+                  'text-sm font-medium transition-all duration-200 hover:text-accent focus-ring',
+                  isActive(link.href) ? 'text-accent' : getTextColor()
+                )}
+                onClick={handleLinkClick}
+              >
+                {link.name}
+              </Link>
+            ))}
+          </nav>
+
+          <div className="flex items-center space-x-4">
+            {/* Theme Toggle */}
+            <ThemeToggle />
+
+            {/* CTA Button */}
             <Link
-              key={link.name}
-              to={link.href}
+              to="/contact"
               className={cn(
-                'text-sm font-medium transition-all duration-200 hover:text-accent focus-ring',
-                isActive(link.href) ? 'text-accent' : getTextColor()
+                'hidden md:inline-flex items-center px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ease-in-out focus-ring',
+                theme === "dark"
+                  ? 'bg-accent text-white hover:bg-accent/90'
+                  : isScrolled
+                    ? 'bg-accent text-white hover:bg-accent/90'
+                    : 'bg-white text-accent hover:bg-white/90'
               )}
               onClick={handleLinkClick}
             >
-              {link.name}
+              Get Free Consultation
             </Link>
-          ))}
-        </nav>
 
-        <div className="flex items-center space-x-4">
-          {/* Theme Toggle */}
-          <ThemeToggle />
-
-          {/* CTA Button */}
-          <Link
-            to="/contact"
-            className={cn(
-              'hidden md:inline-flex items-center px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ease-in-out focus-ring',
-              theme === "dark"
-                ? 'bg-accent text-white hover:bg-accent/90'
-                : isScrolled
-                  ? 'bg-accent text-white hover:bg-accent/90'
-                  : 'bg-white text-accent hover:bg-white/90'
-            )}
-            onClick={handleLinkClick}
-          >
-            Get Free Consultation
-          </Link>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden z-[60] transition-colors focus-ring rounded-full p-2 bg-background/95 backdrop-blur-md border border-border shadow-sm"
-            onClick={() => setMobileNavOpen(!mobileNavOpen)}
-            aria-label={mobileNavOpen ? 'Close menu' : 'Open menu'}
-          >
-            {mobileNavOpen ? (
-              <X size={22} className="text-foreground" />
-            ) : (
-              <Menu size={22} className="text-foreground" />
-            )}
-          </button>
+            {/* Mobile Menu Button */}
+            <button
+              className="md:hidden z-50 transition-colors focus-ring rounded-full p-2 bg-background/95 backdrop-blur-md border border-border shadow-sm"
+              onClick={() => setMobileNavOpen(!mobileNavOpen)}
+              aria-label={mobileNavOpen ? 'Close menu' : 'Open menu'}
+            >
+              {mobileNavOpen ? (
+                <X size={22} className="text-foreground" />
+              ) : (
+                <Menu size={22} className="text-foreground" />
+              )}
+            </button>
+          </div>
         </div>
+      </header>
 
-        {/* Mobile Navigation - Improved structure with better handling */}
-        <div
-          className={cn(
-            'fixed inset-0 bg-background/98 backdrop-blur-md z-[50] transition-all duration-300 ease-in-out md:hidden',
-            mobileNavOpen 
-              ? 'opacity-100 visible' 
-              : 'opacity-0 invisible pointer-events-none'
-          )}
+      {/* Completely separated mobile menu */}
+      {mobileNavOpen && (
+        <div 
+          className="fixed inset-0 z-40 bg-background md:hidden"
+          aria-modal="true"
+          role="dialog"
         >
-          <div className="flex flex-col h-[100dvh] overflow-y-auto">
-            <div className="sticky top-0 z-[55] h-20 bg-background/95 backdrop-blur-md border-b border-border flex items-center justify-between px-6">
-              <Link 
-                to="/" 
-                className="text-2xl font-bold"
+          <div className="flex flex-col h-[100dvh] overflow-y-auto pt-20 pb-6 px-6">
+            <nav className="flex-grow flex flex-col justify-center items-center space-y-2 py-8">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  to={link.href}
+                  className={cn(
+                    "w-full max-w-md text-center text-lg font-medium py-4 px-4 rounded-md transition-colors",
+                    isActive(link.href) 
+                      ? "bg-accent/10 text-accent font-semibold" 
+                      : "text-foreground hover:text-accent hover:bg-accent/5"
+                  )}
+                  onClick={handleLinkClick}
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </nav>
+            
+            <div className="flex flex-col items-center mt-auto pt-6">
+              <Link
+                to="/contact"
+                className="w-full max-w-md text-center px-6 py-3.5 rounded-full text-base font-medium bg-accent text-white hover:bg-accent/90 transition-colors"
                 onClick={handleLinkClick}
               >
-                BM<span className="text-accent">Crafts</span>
+                Get Free Consultation
               </Link>
-              <button
-                className="z-[60] transition-colors focus-ring rounded-full p-2 bg-background/95 backdrop-blur-md border border-border shadow-sm"
-                onClick={() => setMobileNavOpen(false)}
-                aria-label="Close menu"
-              >
-                <X size={22} className="text-foreground" />
-              </button>
-            </div>
-            <div className="flex-grow overflow-y-auto py-6">
-              <div className="w-full max-w-md mx-auto px-6 py-8">
-                <nav className="space-y-4">
-                  {navLinks.map((link) => (
-                    <Link
-                      key={link.name}
-                      to={link.href}
-                      className={cn(
-                        "block text-lg font-medium py-3 px-4 rounded-md transition-colors w-full text-center",
-                        isActive(link.href) 
-                          ? "text-accent bg-accent/10 font-semibold" 
-                          : "text-foreground hover:text-accent hover:bg-accent/5"
-                      )}
-                      onClick={handleLinkClick}
-                    >
-                      {link.name}
-                    </Link>
-                  ))}
-                </nav>
-                <div className="pt-8 pb-4">
-                  <Link
-                    to="/contact"
-                    className="block w-full text-center px-6 py-3.5 rounded-full text-base font-medium bg-accent text-white hover:bg-accent/90 transition-colors"
-                    onClick={handleLinkClick}
-                  >
-                    Get Free Consultation
-                  </Link>
-                </div>
-              </div>
             </div>
           </div>
         </div>
-      </div>
-    </header>
+      )}
+    </>
   );
 };
 
