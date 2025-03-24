@@ -1,4 +1,3 @@
-
 import { ArrowRight } from 'lucide-react';
 import AnimatedGradient from '../ui/AnimatedGradient';
 import { Link } from 'react-router-dom';
@@ -22,7 +21,7 @@ const Hero = () => {
               className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-fade-in opacity-0" 
               style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}
             >
-              Crafting <span className="text-gradient">Websites & Apps</span> That Power Your Business
+              Crafting Fast <span className="text-gradient">Websites & Apps</span> That Power Your Business
             </h1>
             
             <p 
@@ -89,21 +88,6 @@ const Hero = () => {
                 <p className="text-xs text-gray-500">performance boost</p>
               </div>
             </div>
-          </div>
-        </div>
-        
-        {/* Trusted By */}
-        <div 
-          className="mt-24 text-center animate-fade-in opacity-0"
-          style={{ animationDelay: '1.2s', animationFillMode: 'forwards' }}
-        >
-          <p className="text-sm text-gray-500 mb-8">TRUSTED BY INNOVATIVE COMPANIES</p>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 justify-items-center items-center opacity-70">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/1/1e/Google_logo.svg" alt="Google" className="h-6 object-contain" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e6/Amazon_logo.svg" alt="Amazon" className="h-6 object-contain" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Microsoft_logo.svg" alt="Microsoft" className="h-5 object-contain" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="IBM" className="h-5 object-contain" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/1/13/Starbucks_Corporation_Logo_2011.svg" alt="Starbucks" className="h-6 object-contain" />
           </div>
         </div>
       </div>
