@@ -249,29 +249,22 @@ section:first-of-type {
     justify-content: center;
   }
   
-  /* Fix for mobile menu scrolling */
-  body {
-    height: 100% !important;
-    position: relative;
+  /* Fix mobile menu scrolling */
+  body.mobile-menu-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+  }
+  
+  /* Use modern viewport height for mobile menus */
+  .mobile-menu-container {
+    height: 100dvh;
+    max-height: 100dvh;
     overflow-y: auto;
   }
   
-  /* Fix for mobile menu height */
-  [class*="fixed inset-0 bg-background"] {
-    height: 100vh !important;
-    max-height: none !important;
-    min-height: 100vh !important;
-    position: fixed !important;
-    top: 0 !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  /* Ensure links in mobile menu are visible */
-  [class*="fixed inset-0 bg-background"] a {
+  /* Ensure links in mobile menu are visible and properly spaced */
+  [class*="mobile-nav"] a {
     display: block;
     width: 100%;
     padding: 0.75rem 1rem;

@@ -1,3 +1,4 @@
+
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
@@ -24,18 +25,34 @@ const Navbar = () => {
   // Disable body scroll when mobile menu is open
   useEffect(() => {
     if (mobileNavOpen) {
-      document.body.style.overflow = 'hidden';
+      // Save the current scroll position
+      const scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflowY = 'hidden';
     } else {
-      document.body.style.overflow = '';
+      // Restore scroll position when closing the menu
+      const scrollY = document.body.style.top;
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflowY = '';
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+      }
     }
     return () => {
-      document.body.style.overflow = '';
+      // Cleanup to ensure body scrolling is restored
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflowY = '';
     };
   }, [mobileNavOpen]);
 
-  // Add a useEffect to close the menu when location changes
+  // Close mobile menu when location changes
   useEffect(() => {
-    // Close mobile menu when navigating to a new page
     setMobileNavOpen(false);
   }, [location.pathname]);
 
@@ -153,7 +170,6 @@ const Navbar = () => {
             className="md:hidden z-[60] transition-colors focus-ring rounded-full p-2 bg-background/95 backdrop-blur-md border border-border shadow-sm"
             onClick={() => setMobileNavOpen(!mobileNavOpen)}
             aria-label={mobileNavOpen ? 'Close menu' : 'Open menu'}
-            style={{ position: 'relative' }}
           >
             {mobileNavOpen ? (
               <X size={22} className="text-foreground" />
@@ -163,7 +179,7 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile Navigation - Further improved structure */}
+        {/* Mobile Navigation - Improved structure with better handling */}
         <div
           className={cn(
             'fixed inset-0 bg-background/98 backdrop-blur-md z-[50] transition-all duration-300 ease-in-out md:hidden',
@@ -171,10 +187,9 @@ const Navbar = () => {
               ? 'opacity-100 visible' 
               : 'opacity-0 invisible pointer-events-none'
           )}
-          style={{ height: '100vh', overflowY: 'auto' }}
         >
-          <div className="relative min-h-screen flex flex-col">
-            <div className="absolute top-0 left-0 right-0 h-20 bg-background/95 backdrop-blur-md border-b border-border flex items-center justify-between px-6">
+          <div className="flex flex-col h-[100dvh] overflow-y-auto">
+            <div className="sticky top-0 z-[55] h-20 bg-background/95 backdrop-blur-md border-b border-border flex items-center justify-between px-6">
               <Link 
                 to="/" 
                 className="text-2xl font-bold"
@@ -190,7 +205,7 @@ const Navbar = () => {
                 <X size={22} className="text-foreground" />
               </button>
             </div>
-            <div className="flex-grow flex flex-col items-center justify-center py-20">
+            <div className="flex-grow overflow-y-auto py-6">
               <div className="w-full max-w-md mx-auto px-6 py-8">
                 <nav className="space-y-4">
                   {navLinks.map((link) => (
