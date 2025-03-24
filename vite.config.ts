@@ -9,14 +9,23 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
   },
-  plugins: [
-    react(),
-    mode === 'development' &&
-    componentTagger(),
-  ].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  plugins: [
+    react(),
+    mode === 'development' &&
+    componentTagger(),
+  ].filter(Boolean),
+  optimizeDeps: {
+    exclude: ['nodemailer']
+  },
+  build: {
+    rollupOptions: {
+      // Externalize deps that shouldn't be bundled
+      external: ['nodemailer']
+    }
+  }
 }));

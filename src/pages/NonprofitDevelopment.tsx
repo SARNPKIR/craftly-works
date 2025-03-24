@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -109,7 +109,7 @@ const NonprofitDevelopment = () => {
                 </div>
               </div>
               <Link to="/contact">
-                <Button size="lg" className="rounded-full">
+                <Button className="rounded-full">
                   Get Your Non-profit Website starting from £500
                 </Button>
               </Link>
@@ -371,7 +371,7 @@ const NonprofitDevelopment = () => {
             Get in touch today for a free consultation and let us help you create an affordable, effective website that advances your mission.
           </p>
           <Link to="/contact">
-            <Button size="lg" variant="outline" className="bg-white text-accent hover:bg-gray-100 rounded-full">
+            <Button className="bg-white text-accent hover:bg-gray-100 rounded-full">
               Start Your Non-profit Website from £500
             </Button>
           </Link>

@@ -33,6 +33,12 @@ const Navbar = () => {
     };
   }, [mobileNavOpen]);
 
+  // Add a useEffect to close the menu when location changes
+  useEffect(() => {
+    // Close mobile menu when navigating to a new page
+    setMobileNavOpen(false);
+  }, [location.pathname]);
+
   const navLinks = [
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
@@ -60,21 +66,42 @@ const Navbar = () => {
     return "text-foreground";
   };
 
+  // Update the link click handler to force scroll to the top
+  const handleLinkClick = () => {
+    // Close mobile nav if open
+    setMobileNavOpen(false);
+
+    // Force immediate scroll to top
+    const forceScrollToTop = () => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    };
+
+    // Execute immediately
+    forceScrollToTop();
+    
+    // Also execute in the next frame and after a delay
+    requestAnimationFrame(forceScrollToTop);
+    setTimeout(forceScrollToTop, 50);
+  };
+
   return (
     <header
       className={cn(
-        'fixed top-0 w-full z-50 transition-all duration-300 ease-in-out',
+        'fixed top-0 w-full z-50 transition-all duration-300 ease-in-out min-h-[80px] flex items-center',
         isScrolled || theme === "dark"
-          ? 'bg-background/80 backdrop-blur-md border-b border-border py-3'
+          ? 'bg-background/95 backdrop-blur-md border-b border-border'
           : location.pathname === "/"
-            ? 'bg-transparent py-6'
-            : 'bg-background/80 backdrop-blur-md border-b border-border py-3'
+            ? 'bg-transparent'
+            : 'bg-background/95 backdrop-blur-md border-b border-border'
       )}
     >
       <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
         <Link 
           to="/" 
           className="text-2xl font-bold tracking-tight transition-all duration-300 z-10"
+          onClick={handleLinkClick}
         >
           <span className={cn(
             "font-bold transition-colors",
@@ -94,6 +121,7 @@ const Navbar = () => {
                 'text-sm font-medium transition-all duration-200 hover:text-accent focus-ring',
                 isActive(link.href) ? 'text-accent' : getTextColor()
               )}
+              onClick={handleLinkClick}
             >
               {link.name}
             </Link>
@@ -115,58 +143,81 @@ const Navbar = () => {
                   ? 'bg-accent text-white hover:bg-accent/90'
                   : 'bg-white text-accent hover:bg-white/90'
             )}
+            onClick={handleLinkClick}
           >
             Get Free Consultation
           </Link>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden z-50 transition-colors focus-ring rounded-full p-1"
+            className="md:hidden z-[60] transition-colors focus-ring rounded-full p-2 bg-background/95 backdrop-blur-md border border-border shadow-sm"
             onClick={() => setMobileNavOpen(!mobileNavOpen)}
             aria-label={mobileNavOpen ? 'Close menu' : 'Open menu'}
+            style={{ position: 'relative' }}
           >
             {mobileNavOpen ? (
-              <X size={24} className="text-foreground" />
+              <X size={22} className="text-foreground" />
             ) : (
-              <Menu size={24} className={getTextColor()} />
+              <Menu size={22} className="text-foreground" />
             )}
           </button>
         </div>
 
-        {/* Mobile Navigation - Fixed positioning to avoid overlap */}
+        {/* Mobile Navigation - Further improved structure */}
         <div
           className={cn(
-            'fixed inset-0 bg-background z-40 transition-all duration-300 ease-in-out md:hidden',
+            'fixed inset-0 bg-background/98 backdrop-blur-md z-[50] transition-all duration-300 ease-in-out md:hidden',
             mobileNavOpen 
-              ? 'opacity-100 visible translate-y-0' 
-              : 'opacity-0 invisible translate-y-[-10px] pointer-events-none'
+              ? 'opacity-100 visible' 
+              : 'opacity-0 invisible pointer-events-none'
           )}
+          style={{ height: '100vh', overflowY: 'auto' }}
         >
-          <div className="flex flex-col items-center pt-20 pb-8 h-full overflow-y-auto">
-            <div className="w-full max-w-md mx-auto px-6 py-8 space-y-6">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  to={link.href}
-                  className={cn(
-                    "block text-lg font-medium py-2 px-4 rounded-md transition-colors w-full text-center",
-                    isActive(link.href) 
-                      ? "text-accent bg-accent/10" 
-                      : "text-foreground hover:text-accent hover:bg-accent/5"
-                  )}
-                  onClick={() => setMobileNavOpen(false)}
-                >
-                  {link.name}
-                </Link>
-              ))}
-              <div className="pt-4">
-                <Link
-                  to="/contact"
-                  className="block w-full text-center px-6 py-3 rounded-full text-base font-medium bg-accent text-white hover:bg-accent/90 transition-colors"
-                  onClick={() => setMobileNavOpen(false)}
-                >
-                  Get Free Consultation
-                </Link>
+          <div className="relative min-h-screen flex flex-col">
+            <div className="absolute top-0 left-0 right-0 h-20 bg-background/95 backdrop-blur-md border-b border-border flex items-center justify-between px-6">
+              <Link 
+                to="/" 
+                className="text-2xl font-bold"
+                onClick={handleLinkClick}
+              >
+                BM<span className="text-accent">Crafts</span>
+              </Link>
+              <button
+                className="z-[60] transition-colors focus-ring rounded-full p-2 bg-background/95 backdrop-blur-md border border-border shadow-sm"
+                onClick={() => setMobileNavOpen(false)}
+                aria-label="Close menu"
+              >
+                <X size={22} className="text-foreground" />
+              </button>
+            </div>
+            <div className="flex-grow flex flex-col items-center justify-center py-20">
+              <div className="w-full max-w-md mx-auto px-6 py-8">
+                <nav className="space-y-4">
+                  {navLinks.map((link) => (
+                    <Link
+                      key={link.name}
+                      to={link.href}
+                      className={cn(
+                        "block text-lg font-medium py-3 px-4 rounded-md transition-colors w-full text-center",
+                        isActive(link.href) 
+                          ? "text-accent bg-accent/10 font-semibold" 
+                          : "text-foreground hover:text-accent hover:bg-accent/5"
+                      )}
+                      onClick={handleLinkClick}
+                    >
+                      {link.name}
+                    </Link>
+                  ))}
+                </nav>
+                <div className="pt-8 pb-4">
+                  <Link
+                    to="/contact"
+                    className="block w-full text-center px-6 py-3.5 rounded-full text-base font-medium bg-accent text-white hover:bg-accent/90 transition-colors"
+                    onClick={handleLinkClick}
+                  >
+                    Get Free Consultation
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

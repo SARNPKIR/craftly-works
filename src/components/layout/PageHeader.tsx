@@ -1,4 +1,3 @@
-
 import AnimatedGradient from "../ui/AnimatedGradient";
 
 interface PageHeaderProps {
@@ -8,7 +7,7 @@ interface PageHeaderProps {
 
 const PageHeader = ({ title, subtitle }: PageHeaderProps) => {
   return (
-    <div className="relative py-24 overflow-hidden">
+    <div className="relative py-24 mt-16 overflow-hidden">
       <AnimatedGradient className="absolute inset-0 -z-10" />
       <div className="container mx-auto px-6">
         <div className="text-center max-w-3xl mx-auto">

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { GraduationCap, BookOpen, Users, BarChart3, Trophy, Tablet } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const EducationalDevelopment: React.FC = () => {
+const EducationalDevelopment = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -98,7 +98,7 @@ const EducationalDevelopment: React.FC = () => {
                 <span>Online course creators</span>
               </li>
             </ul>
-            <Button asChild size="lg" className="mt-2">
+            <Button asChild className="mt-2">
               <Link to="/contact">Discuss Your Educational Platform</Link>
             </Button>
           </div>
@@ -214,7 +214,7 @@ const EducationalDevelopment: React.FC = () => {
           <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
             Let's discuss how we can help you build an engaging, effective learning platform that meets your specific educational goals.
           </p>
-          <Button asChild size="lg">
+          <Button asChild>
             <Link to="/contact">Get Started Today</Link>
           </Button>
         </div>

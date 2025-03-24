@@ -1,9 +1,48 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Fix scroll behavior */
+html {
+  scroll-behavior: auto !important; /* Override any smooth scrolling */
+  height: 100%;
+  scroll-padding-top: 0;
+  overflow-y: auto;
+}
+
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  position: relative;
+  min-height: 100%;
+  overflow-y: auto;
+}
+
+/* Prevent content jump on page load */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+/* Fix for pages starting in the middle */
+.page-wrapper {
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Force anchor links to respect header height */
+:target {
+  scroll-margin-top: 100px;
+}
 
 @layer base {
   :root {
@@ -100,6 +139,7 @@
   
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Playfair Display', serif;
+    scroll-margin-top: 100px;
   }
 }
 
@@ -167,4 +207,74 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* Fix for header overlap */
+main {
+  padding-top: 80px; /* Adjust based on your header height */
+}
+
+/* Adjust for different pages */
+.page-wrapper main {
+  padding-top: 80px;
+}
+
+/* For the home page, which might have a transparent header initially */
+.page-wrapper[data-page="home"] main {
+  padding-top: 0;
+}
+
+/* Make sure hero sections on the home page aren't hidden */
+.page-wrapper[data-page="home"] main > section:first-child {
+  padding-top: 100px;
+}
+
+/* Fix for internal section links */
+section {
+  scroll-margin-top: 100px;
+}
+
+/* Ensure first sections on pages have enough padding */
+section:first-of-type {
+  padding-top: 2rem;
+}
+
+/* Enhanced mobile menu styles */
+@media (max-width: 768px) {
+  /* Ensure mobile menu button is always visible */
+  button[aria-label="Open menu"],
+  button[aria-label="Close menu"] {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Fix for mobile menu scrolling */
+  body {
+    height: 100% !important;
+    position: relative;
+    overflow-y: auto;
+  }
+  
+  /* Fix for mobile menu height */
+  [class*="fixed inset-0 bg-background"] {
+    height: 100vh !important;
+    max-height: none !important;
+    min-height: 100vh !important;
+    position: fixed !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Ensure links in mobile menu are visible */
+  [class*="fixed inset-0 bg-background"] a {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+  }
 }

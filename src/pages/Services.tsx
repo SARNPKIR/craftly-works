@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PageHeader from "@/components/layout/PageHeader";
@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Code, Paintbrush, ShoppingCart, BarChart, Smartphone, Globe, GraduationCap, Heart, HeartPulse, Scale, Home, Dumbbell } from "lucide-react";
 import { Link } from "react-router-dom";
+import useScrollToTop from "@/hooks/useScrollToTop";
 
 const services = [
   {
@@ -187,127 +188,136 @@ const services = [
 ];
 
 const Services = () => {
+  // Use the scroll to top hook
+  useScrollToTop();
+  
+  // Additional scroll reset
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="page-wrapper flex flex-col min-h-screen bg-background">
       <Navbar />
-      <PageHeader 
-        title="Our Services" 
-        subtitle="Comprehensive web solutions to help your business grow online"
-      />
-      <Breadcrumbs />
-      
-      <section className="py-16">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <Card key={index} className={`hover-card border-none shadow-lg overflow-hidden ${service.highlighted ? 'ring-2 ring-accent/20' : ''}`}>
-                <CardContent className="p-0">
-                  <div className="p-6 border-b">
-                    <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-accent mb-4">
-                      <service.icon size={24} />
+      <main className="flex-grow">
+        <PageHeader 
+          title="Our Services" 
+          subtitle="Transforming ideas into exceptional digital experiences"
+        />
+        <Breadcrumbs />
+        
+        <section className="py-16">
+          <div className="container mx-auto px-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {services.map((service, index) => (
+                <Card key={index} className={`hover-card border-none shadow-lg overflow-hidden ${service.highlighted ? 'ring-2 ring-accent/20' : ''}`}>
+                  <CardContent className="p-0">
+                    <div className="p-6 border-b">
+                      <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-accent mb-4">
+                        <service.icon size={24} />
+                      </div>
+                      <h3 className="text-xl font-bold mb-3">{service.title}</h3>
+                      <p className="text-gray-600">{service.description}</p>
                     </div>
-                    <h3 className="text-xl font-bold mb-3">{service.title}</h3>
-                    <p className="text-gray-600">{service.description}</p>
+                    
+                    <div className="p-6">
+                      <h4 className="font-semibold mb-3">What's included:</h4>
+                      <ul className="space-y-2 mb-6">
+                        {service.features.map((feature, i) => (
+                          <li key={i} className="flex items-start">
+                            <span className="mr-2 mt-1 text-accent">•</span>
+                            <span className="text-gray-600">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      
+                      <Link to={service.link}>
+                        <Button className={`w-full ${service.highlighted ? 'bg-accent hover:bg-accent/90' : ''}`}>
+                          {service.cta}
+                        </Button>
+                      </Link>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+        
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <span className="bg-accent/10 text-accent px-4 py-1.5 rounded-full text-sm font-medium mb-6 inline-block">
+                  Our Approach
+                </span>
+                <h2 className="text-3xl font-bold mb-6">How We Deliver Exceptional Services</h2>
+                <div className="space-y-6">
+                  <div className="flex">
+                    <div className="mr-4 flex-shrink-0">
+                      <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-white font-medium">
+                        1
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-semibold mb-1">Discovery</h4>
+                      <p className="text-gray-600">We start by understanding your business goals, audience, and requirements through in-depth consultation.</p>
+                    </div>
                   </div>
                   
-                  <div className="p-6">
-                    <h4 className="font-semibold mb-3">What's included:</h4>
-                    <ul className="space-y-2 mb-6">
-                      {service.features.map((feature, i) => (
-                        <li key={i} className="flex items-start">
-                          <span className="mr-2 mt-1 text-accent">•</span>
-                          <span className="text-gray-600">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    
-                    <Link to={service.link}>
-                      <Button className={`w-full ${service.highlighted ? 'bg-accent hover:bg-accent/90' : ''}`}>
-                        {service.cta}
-                      </Button>
-                    </Link>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-      
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <span className="bg-accent/10 text-accent px-4 py-1.5 rounded-full text-sm font-medium mb-6 inline-block">
-                Our Approach
-              </span>
-              <h2 className="text-3xl font-bold mb-6">How We Deliver Exceptional Services</h2>
-              <div className="space-y-6">
-                <div className="flex">
-                  <div className="mr-4 flex-shrink-0">
-                    <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-white font-medium">
-                      1
+                  <div className="flex">
+                    <div className="mr-4 flex-shrink-0">
+                      <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-white font-medium">
+                        2
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-semibold mb-1">Strategy</h4>
+                      <p className="text-gray-600">We create a detailed roadmap and solution design tailored to your specific needs and objectives.</p>
                     </div>
                   </div>
-                  <div>
-                    <h4 className="text-lg font-semibold mb-1">Discovery</h4>
-                    <p className="text-gray-600">We start by understanding your business goals, audience, and requirements through in-depth consultation.</p>
+                  
+                  <div className="flex">
+                    <div className="mr-4 flex-shrink-0">
+                      <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-white font-medium">
+                        3
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-semibold mb-1">Implementation</h4>
+                      <p className="text-gray-600">Our expert team brings your project to life with regular updates and feedback sessions.</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex">
+                    <div className="mr-4 flex-shrink-0">
+                      <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-white font-medium">
+                        4
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-semibold mb-1">Support & Growth</h4>
+                      <p className="text-gray-600">We provide ongoing maintenance and optimization to ensure your digital solution evolves with your business.</p>
+                    </div>
                   </div>
                 </div>
                 
-                <div className="flex">
-                  <div className="mr-4 flex-shrink-0">
-                    <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-white font-medium">
-                      2
-                    </div>
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold mb-1">Strategy</h4>
-                    <p className="text-gray-600">We create a detailed roadmap and solution design tailored to your specific needs and objectives.</p>
-                  </div>
-                </div>
-                
-                <div className="flex">
-                  <div className="mr-4 flex-shrink-0">
-                    <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-white font-medium">
-                      3
-                    </div>
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold mb-1">Implementation</h4>
-                    <p className="text-gray-600">Our expert team brings your project to life with regular updates and feedback sessions.</p>
-                  </div>
-                </div>
-                
-                <div className="flex">
-                  <div className="mr-4 flex-shrink-0">
-                    <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-white font-medium">
-                      4
-                    </div>
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold mb-1">Support & Growth</h4>
-                    <p className="text-gray-600">We provide ongoing maintenance and optimization to ensure your digital solution evolves with your business.</p>
-                  </div>
-                </div>
+                <Link to="/contact" className="mt-8 inline-block">
+                  <Button>Schedule a Consultation</Button>
+                </Link>
               </div>
               
-              <Link to="/contact" className="mt-8 inline-block">
-                <Button size="lg">Schedule a Consultation</Button>
-              </Link>
-            </div>
-            
-            <div className="relative rounded-2xl overflow-hidden shadow-xl h-[500px]">
-              <img 
-                src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" 
-                alt="Our team working on a project" 
-                className="w-full h-full object-cover"
-              />
+              <div className="relative rounded-2xl overflow-hidden shadow-xl h-[500px]">
+                <img 
+                  src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" 
+                  alt="Our team working on a project" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-      
+        </section>
+      </main>
       <Footer />
     </div>
   );

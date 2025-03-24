@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Home, Search, Map, Image, Calendar, Database } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const RealEstateDevelopment: React.FC = () => {
+const RealEstateDevelopment = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -89,7 +89,7 @@ const RealEstateDevelopment: React.FC = () => {
               </p>
               <div className="mt-8">
                 <Link to="/contact">
-                  <Button size="lg">
+                  <Button>
                     Discuss Your Real Estate Project
                   </Button>
                 </Link>
@@ -249,7 +249,7 @@ const RealEstateDevelopment: React.FC = () => {
                 From basic property websites to advanced property portals with virtual tours and agent management systems, we create digital solutions that help you sell and rent properties faster.
               </p>
               <Link to="/contact">
-                <Button size="lg">
+                <Button>
                   Get Started From £500
                 </Button>
               </Link>

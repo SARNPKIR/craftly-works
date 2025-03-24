@@ -75,10 +75,6 @@ const Contact = () => {
         </div>
       ) : (
         <form onSubmit={handleSubmit}>
-          <div className="mb-6">
-            <h3 className="text-xl font-bold mb-6">Ready to transform your digital presence? Get in touch for a free consultation and custom quote for your project.</h3>
-          </div>
-          
           {submitError && (
             <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-md flex items-center text-red-700">
               <AlertCircle className="h-5 w-5 mr-2 flex-shrink-0" />

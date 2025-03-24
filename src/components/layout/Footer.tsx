@@ -12,16 +12,16 @@ const Footer = () => {
               Crafting websites and apps that power your business. Affordable, professional, and tailored web solutions for every industry.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-500 hover:text-accent transition-colors" aria-label="Facebook">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-accent transition-colors" aria-label="Facebook">
                 <Facebook size={20} />
               </a>
-              <a href="#" className="text-gray-500 hover:text-accent transition-colors" aria-label="Instagram">
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-accent transition-colors" aria-label="Instagram">
                 <Instagram size={20} />
               </a>
-              <a href="#" className="text-gray-500 hover:text-accent transition-colors" aria-label="Twitter">
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-accent transition-colors" aria-label="Twitter">
                 <Twitter size={20} />
               </a>
-              <a href="#" className="text-gray-500 hover:text-accent transition-colors" aria-label="LinkedIn">
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-accent transition-colors" aria-label="LinkedIn">
                 <Linkedin size={20} />
               </a>
             </div>
@@ -30,11 +30,13 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Services</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-600 hover:text-accent transition-colors">E-commerce Development</a></li>
-              <li><a href="#" className="text-gray-600 hover:text-accent transition-colors">Healthcare Websites</a></li>
-              <li><a href="#" className="text-gray-600 hover:text-accent transition-colors">Real Estate Websites</a></li>
-              <li><a href="#" className="text-gray-600 hover:text-accent transition-colors">Law Firm Websites</a></li>
-              <li><a href="#" className="text-gray-600 hover:text-accent transition-colors">Non-profit Websites</a></li>
+              <li><Link to="/services/ecommerce-development" className="text-gray-600 hover:text-accent transition-colors">E-commerce Development</Link></li>
+              <li><Link to="/services/healthcare-development" className="text-gray-600 hover:text-accent transition-colors">Healthcare Websites</Link></li>
+              <li><Link to="/services/real-estate-development" className="text-gray-600 hover:text-accent transition-colors">Real Estate Websites</Link></li>
+              <li><Link to="/services/law-firm-development" className="text-gray-600 hover:text-accent transition-colors">Law Firm Websites</Link></li>
+              <li><Link to="/services/nonprofit-development" className="text-gray-600 hover:text-accent transition-colors">Non-profit Websites</Link></li>
+              <li><Link to="/services/educational-development" className="text-gray-600 hover:text-accent transition-colors">Educational Websites</Link></li>
+              <li><Link to="/services/fitness-development" className="text-gray-600 hover:text-accent transition-colors">Fitness Trainer Websites</Link></li>
             </ul>
           </div>
           
@@ -42,9 +44,9 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">Company</h3>
             <ul className="space-y-2">
               <li><Link to="/about" className="text-gray-600 hover:text-accent transition-colors">About</Link></li>
-              <li><a href="#" className="text-gray-600 hover:text-accent transition-colors">Case Studies</a></li>
+              <li><Link to="/portfolio" className="text-gray-600 hover:text-accent transition-colors">Portfolio</Link></li>
               <li><Link to="/blog" className="text-gray-600 hover:text-accent transition-colors">Blog</Link></li>
-              <li><a href="#" className="text-gray-600 hover:text-accent transition-colors">Careers</a></li>
+              <li><Link to="/pricing" className="text-gray-600 hover:text-accent transition-colors">Pricing</Link></li>
               <li><Link to="/contact" className="text-gray-600 hover:text-accent transition-colors">Contact</Link></li>
             </ul>
           </div>
@@ -54,11 +56,11 @@ const Footer = () => {
             <ul className="space-y-4">
               <li className="flex items-start">
                 <Mail size={18} className="text-accent mt-1 mr-3" />
-                <span className="text-gray-600">hello@bmcrafts.co.uk</span>
+                <a href="mailto:hello@bmcrafts.co.uk" className="text-gray-600 hover:text-accent transition-colors">hello@bmcrafts.co.uk</a>
               </li>
               <li className="flex items-start">
                 <Phone size={18} className="text-accent mt-1 mr-3" />
-                <span className="text-gray-600">+44 (0) 123 456 7890</span>
+                <a href="tel:+441234567890" className="text-gray-600 hover:text-accent transition-colors">+44 (0) 123 456 7890</a>
               </li>
               <li className="flex items-start">
                 <MapPin size={18} className="text-accent mt-1 mr-3" />
