@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
@@ -6,6 +5,7 @@ import Hero from '@/components/sections/Hero';
 import Services from '@/components/sections/Services';
 import WhyChooseUs from '@/components/sections/WhyChooseUs';
 import Testimonials from '@/components/sections/Testimonials';
+import AnnouncementBar from '@/components/ui/AnnouncementBar';
 import useScrollToTop from '@/hooks/useScrollToTop';
 
 const Index = () => {
@@ -32,7 +32,7 @@ const Index = () => {
         
         const targetElement = document.querySelector(anchor.hash);
         if (targetElement) {
-          // For same-page hash links, use smooth scrolling with offset for the header
+          // For same-page hash links, use smooth scrolling
           window.scrollTo({
             top: targetElement.getBoundingClientRect().top + window.scrollY - 100,
             behavior: 'smooth'
@@ -51,6 +51,7 @@ const Index = () => {
 
   return (
     <div className="page-wrapper flex flex-col min-h-screen" data-page="home">
+      <AnnouncementBar />
       <Navbar />
       <main className="flex-grow">
         <Hero />

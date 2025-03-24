@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
@@ -50,10 +49,12 @@ const Navbar = () => {
     { name: 'About', href: '/about' },
     { name: 'Services', href: '/services' },
     { name: 'Portfolio', href: '/portfolio' },
-    { name: 'Blog', href: '/blog' },
     { name: 'Pricing', href: '/pricing' },
     { name: 'Contact', href: '/contact' },
   ];
+
+  // External links
+  const externalBlogUrl = "https://bmcrafts.co.uk/blog/"; // Replace with your WordPress URL
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -79,7 +80,8 @@ const Navbar = () => {
     <>
       <header
         className={cn(
-          'fixed top-0 w-full z-50 transition-all duration-300 ease-in-out min-h-[80px] flex items-center',
+          'fixed top-0 w-full z-50 transition-all duration-300 ease-in-out py-4',
+          location.pathname === "/" ? 'mt-10' : '', // Add margin-top when on homepage to account for announcement bar
           isScrolled 
             ? 'bg-background/95 backdrop-blur-md shadow-md border-b border-border'
             : location.pathname === "/"
@@ -116,6 +118,19 @@ const Navbar = () => {
                 {link.name}
               </Link>
             ))}
+            
+            {/* External Blog Link */}
+            <a
+              href={externalBlogUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(
+                'text-sm font-medium transition-all duration-200 hover:text-accent focus-ring',
+                getTextColor()
+              )}
+            >
+              Blog
+            </a>
           </nav>
 
           <div className="flex items-center space-x-4">
@@ -178,6 +193,16 @@ const Navbar = () => {
                   {link.name}
                 </Link>
               ))}
+              
+              {/* External Blog Link (Mobile) */}
+              <a
+                href={externalBlogUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full max-w-md text-center text-lg font-medium py-4 px-4 rounded-md transition-colors text-foreground hover:text-accent hover:bg-accent/5"
+              >
+                Blog
+              </a>
             </nav>
             
             <div className="flex flex-col items-center mt-auto pt-6">
