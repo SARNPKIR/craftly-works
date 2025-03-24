@@ -1,3 +1,4 @@
+
 import { useEffect } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
@@ -5,7 +6,6 @@ import Hero from '@/components/sections/Hero';
 import Services from '@/components/sections/Services';
 import WhyChooseUs from '@/components/sections/WhyChooseUs';
 import Testimonials from '@/components/sections/Testimonials';
-import Contact from '@/components/sections/Contact';
 import useScrollToTop from '@/hooks/useScrollToTop';
 
 const Index = () => {
@@ -57,7 +57,6 @@ const Index = () => {
         <Services />
         <WhyChooseUs />
         <Testimonials />
-        <Contact />
       </main>
       <Footer />
     </div>

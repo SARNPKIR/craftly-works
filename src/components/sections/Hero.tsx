@@ -1,3 +1,4 @@
+
 import { ArrowRight } from 'lucide-react';
 import AnimatedGradient from '../ui/AnimatedGradient';
 import { Link } from 'react-router-dom';
@@ -70,8 +71,8 @@ const Hero = () => {
             >
               <div className="glass-card rounded-2xl overflow-hidden shadow-xl p-1.5 transition-all duration-500 animate-float">
                 <img 
-                  src="/services/images/Uk-Fast-and-Speedy Solutions.jpg" 
-                  alt="UK Web Development" 
+                  src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80&w=1600" 
+                  alt="Web Development" 
                   className="w-full h-auto rounded-xl object-cover"
                 />
               </div>

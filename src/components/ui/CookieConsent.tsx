@@ -1,6 +1,7 @@
+
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { X } from 'lucide-react';
+import { X, ShieldCheck } from 'lucide-react';
 import { Button } from './button';
 
 const CookieConsent = () => {
@@ -32,13 +33,16 @@ const CookieConsent = () => {
 
   return (
     <div className="fixed bottom-0 inset-x-0 z-50 p-4 md:p-6">
-      <div className="max-w-4xl mx-auto bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-800">
+      <div className="max-w-4xl mx-auto glass-card bg-white/95 dark:bg-gray-800/95 rounded-lg shadow-lg border border-accent/20 backdrop-blur-md">
         <div className="p-4 md:p-6">
           <div className="flex justify-between items-start">
-            <h3 className="text-lg font-semibold">We value your privacy</h3>
+            <div className="flex items-center gap-2">
+              <ShieldCheck size={22} className="text-accent" />
+              <h3 className="text-lg font-semibold">We value your privacy</h3>
+            </div>
             <button 
               onClick={() => setShowConsent(false)}
-              className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+              className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 focus-ring rounded"
               aria-label="Close"
             >
               <X size={20} />
@@ -48,7 +52,7 @@ const CookieConsent = () => {
           <div className="mt-2">
             <p className="text-gray-600 dark:text-gray-300 text-sm">
               We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies as described in our{' '}
-              <Link to="/cookie-policy" className="text-accent hover:underline">
+              <Link to="/cookie-policy" className="text-accent font-medium hover:underline">
                 Cookie Policy
               </Link>.
             </p>
@@ -59,6 +63,7 @@ const CookieConsent = () => {
               variant="outline"
               size="sm"
               onClick={acceptNecessary}
+              className="border-accent/30 hover:bg-accent/10 text-foreground"
             >
               Accept Necessary Only
             </Button>
@@ -66,6 +71,7 @@ const CookieConsent = () => {
               variant="default"
               size="sm"
               onClick={acceptAll}
+              className="bg-accent hover:bg-accent/90 text-white"
             >
               Accept All
             </Button>
@@ -76,4 +82,4 @@ const CookieConsent = () => {
   );
 };
 
-export default CookieConsent; 
+export default CookieConsent;
