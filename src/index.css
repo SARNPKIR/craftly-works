@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;700&display=swap');
 
 @tailwind base;
@@ -8,7 +9,7 @@
 html {
   scroll-behavior: auto !important; /* Override any smooth scrolling */
   height: 100%;
-  scroll-padding-top: 0;
+  scroll-padding-top: 80px; /* Add padding for anchor links */
   overflow-y: auto;
 }
 
@@ -227,6 +228,7 @@ main {
 /* Make sure hero sections on the home page aren't hidden */
 .page-wrapper[data-page="home"] main > section:first-child {
   padding-top: 100px;
+  margin-top: -80px; /* Counteract the header height */
 }
 
 /* Fix for internal section links */

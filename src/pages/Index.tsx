@@ -32,7 +32,7 @@ const Index = () => {
         
         const targetElement = document.querySelector(anchor.hash);
         if (targetElement) {
-          // For same-page hash links, use smooth scrolling
+          // For same-page hash links, use smooth scrolling with offset for the header
           window.scrollTo({
             top: targetElement.getBoundingClientRect().top + window.scrollY - 100,
             behavior: 'smooth'

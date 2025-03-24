@@ -79,9 +79,9 @@ const Navbar = () => {
     <>
       <header
         className={cn(
-          'fixed top-0 w-full z-40 transition-all duration-300 ease-in-out min-h-[80px] flex items-center',
-          isScrolled || theme === "dark"
-            ? 'bg-background/95 backdrop-blur-md border-b border-border'
+          'fixed top-0 w-full z-50 transition-all duration-300 ease-in-out min-h-[80px] flex items-center',
+          isScrolled 
+            ? 'bg-background/95 backdrop-blur-md shadow-md border-b border-border'
             : location.pathname === "/"
               ? 'bg-transparent'
               : 'bg-background/95 backdrop-blur-md border-b border-border'
