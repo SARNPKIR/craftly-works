@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { ShoppingCart, Heart, Home, Scale, Building, ArrowRight, GraduationCap } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Link } from 'react-router-dom';
 
 const services = [
   {
@@ -12,6 +13,7 @@ const services = [
     price: '£1,500',
     features: ['Product Catalog', 'Secure Checkout', 'Payment Integration', 'Inventory Management'],
     color: 'from-blue-500 to-cyan-400',
+    link: '/services/ecommerce-development'
   },
   {
     id: 'healthcare',
@@ -21,6 +23,7 @@ const services = [
     price: '£2,000',
     features: ['HIPAA Compliance', 'Patient Portals', 'Appointment Booking', 'Medical Records'],
     color: 'from-red-500 to-pink-500',
+    link: '/services/healthcare-development'
   },
   {
     id: 'education',
@@ -30,6 +33,7 @@ const services = [
     price: '£2,500',
     features: ['Course Creation Tools', 'Student Dashboards', 'Progress Tracking', 'Assessment Tools'],
     color: 'from-violet-500 to-purple-500',
+    link: '/services/educational-development'
   },
   {
     id: 'realestate',
@@ -39,6 +43,7 @@ const services = [
     price: '£1,800',
     features: ['Property Listings', 'Virtual Tours', 'Agent Profiles', 'Mortgage Calculator'],
     color: 'from-green-500 to-emerald-500',
+    link: '/services/real-estate-development'
   },
   {
     id: 'lawfirm',
@@ -48,6 +53,7 @@ const services = [
     price: '£1,700',
     features: ['Practice Area Pages', 'Attorney Profiles', 'Case Results', 'Client Testimonials'],
     color: 'from-amber-500 to-yellow-400',
+    link: '/services/law-firm-development'
   },
   {
     id: 'nonprofit',
@@ -57,6 +63,7 @@ const services = [
     price: '£500',
     features: ['Donation Systems', 'Event Management', 'Volunteer Signup', 'Impact Reporting'],
     color: 'from-purple-500 to-violet-500',
+    link: '/services/nonprofit-development'
   },
 ];
 
@@ -127,13 +134,13 @@ const Services = () => {
                 </div>
                 
                 <div className="mt-auto p-6 pt-0">
-                  <a
-                    href="#"
+                  <Link
+                    to={service.link}
                     className="inline-flex items-center justify-center w-full px-6 py-3 bg-white text-accent rounded-full text-base font-medium hover:bg-accent hover:text-white transition-all duration-300 border border-gray-200 shadow-sm group-hover:shadow-md"
                   >
                     Learn More
                     <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -141,12 +148,12 @@ const Services = () => {
         </div>
         
         <div className="text-center mt-12">
-          <a
-            href="#contact"
+          <Link
+            to="/contact"
             className="inline-flex items-center justify-center px-8 py-4 bg-accent text-white rounded-full text-base font-medium hover:bg-accent/90 transition-colors shadow-md hover:shadow-lg"
           >
             Get Custom Quote
-          </a>
+          </Link>
         </div>
       </div>
       
