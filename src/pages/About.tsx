@@ -9,28 +9,27 @@ import useScrollToTop from "@/hooks/useScrollToTop";
 
 const teamMembers = [
   {
-    name: "Jane Smith",
+    name: "Larry Cullin",
     position: "Founder & CEO",
-    bio: "With over 15 years of experience in web development and digital marketing, Jane leads our team with passion and innovation.",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+    bio: "With over 15 years of experience in web development and digital marketing, Larry leads our team with passion and innovation.",
+    image: "/services/images/Larry.jpg"
   },
   {
-    name: "John Miller",
+    name: "Adil Shah",
     position: "Lead Developer",
-    bio: "John brings 10+ years of full-stack development expertise, specializing in creating robust, scalable web applications.",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+    bio: "Adil brings 10+ years of full-stack development expertise, specializing in creating robust, scalable web applications.",
+    image: "/services/images/adil.jpg"
   },
   {
-    name: "Sarah Johnson",
+    name: "Sarah ",
     position: "UX/UI Designer",
     bio: "Sarah combines aesthetics with functionality to create intuitive user experiences that delight clients and their customers.",
-    image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-  },
+    image: "/services/images/sarah2.jpg"  },
   {
-    name: "Michael Brown",
+    name: "Raj Bajwa",
     position: "Project Manager",
-    bio: "Michael ensures all our projects are delivered on time and exceed client expectations through meticulous planning.",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+    bio: "RAJ ensures all our projects are delivered on time and exceed client expectations through meticulous planning.",
+    image: "/services/images/Rajpatail.jpg"
   }
 ];
 
@@ -76,7 +75,7 @@ const About = () => {
         />
         <Breadcrumbs />
         
-        <section className="py-16">
+        <section className="py-8">
           <div className="container mx-auto px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
@@ -103,7 +102,7 @@ const About = () => {
               </div>
               <div className="relative rounded-2xl overflow-hidden shadow-xl h-[400px]">
                 <img 
-                  src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" 
+                  src="/services/images/team.webp" 
                   alt="Our team collaborating" 
                   className="w-full h-full object-cover"
                 />

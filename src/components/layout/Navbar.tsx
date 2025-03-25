@@ -25,17 +25,9 @@ const Navbar = () => {
   // Handle body scroll locking when mobile menu is open
   useEffect(() => {
     if (mobileNavOpen) {
-      document.body.classList.add('overflow-hidden', 'fixed', 'inset-x-0');
-      document.body.style.top = `-${window.scrollY}px`;
-      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
     } else {
-      const scrollY = document.body.style.top;
-      document.body.classList.remove('overflow-hidden', 'fixed', 'inset-x-0');
-      document.body.style.top = '';
-      document.body.style.width = '';
-      if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
-      }
+      document.body.style.overflow = '';
     }
   }, [mobileNavOpen]);
 
@@ -49,6 +41,7 @@ const Navbar = () => {
     { name: 'About', href: '/about' },
     { name: 'Services', href: '/services' },
     { name: 'Portfolio', href: '/portfolio' },
+    { name: 'Page Speed Test', href: '/page-speed-test' },
     { name: 'Pricing', href: '/pricing' },
     { name: 'Contact', href: '/contact' },
   ];
@@ -78,9 +71,14 @@ const Navbar = () => {
 
   return (
     <>
+      {/* Placeholder div to ensure content doesn't get hidden behind navbar */}
+      <div 
+
+      />
+      
       <header
         className={cn(
-          'fixed top-0 w-full z-50 transition-all duration-300 ease-in-out py-4',
+          'fixed top-0 w-full z-50 transition-all duration-300 ease-in-out py-3', // Reduced padding
           location.pathname === "/" ? 'mt-10' : '', // Add margin-top when on homepage to account for announcement bar
           isScrolled 
             ? 'bg-background/95 backdrop-blur-md shadow-md border-b border-border'
@@ -155,67 +153,92 @@ const Navbar = () => {
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden z-50 transition-colors focus-ring rounded-full p-2 bg-background/95 backdrop-blur-md border border-border shadow-sm"
+              className="md:hidden focus:outline-none focus:ring-2 focus:ring-accent/20 rounded-full p-2"
               onClick={() => setMobileNavOpen(!mobileNavOpen)}
               aria-label={mobileNavOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={mobileNavOpen}
+              aria-controls="mobile-menu"
             >
-              {mobileNavOpen ? (
-                <X size={22} className="text-foreground" />
-              ) : (
-                <Menu size={22} className="text-foreground" />
-              )}
+              <Menu size={24} className={`${mobileNavOpen ? 'hidden' : 'block'} text-foreground`} />
+              <X size={24} className={`${mobileNavOpen ? 'block' : 'hidden'} text-foreground`} />
             </button>
           </div>
         </div>
       </header>
 
-      {/* Completely separated mobile menu */}
-      {mobileNavOpen && (
-        <div 
-          className="fixed inset-0 z-40 bg-background md:hidden"
-          aria-modal="true"
-          role="dialog"
-        >
-          <div className="flex flex-col h-[100dvh] overflow-y-auto pt-20 pb-6 px-6">
-            <nav className="flex-grow flex flex-col justify-center items-center space-y-2 py-8">
+      {/* New Mobile Menu Implementation */}
+      <div
+        id="mobile-menu"
+        className={`fixed inset-0 bg-background z-40 transition-transform duration-300 ease-in-out transform ${
+          mobileNavOpen ? 'translate-x-0' : 'translate-x-full'
+        } md:hidden`}
+        aria-hidden={!mobileNavOpen}
+      >
+        <div className="flex flex-col h-full">
+          {/* Mobile Menu Header */}
+          <div className={`flex items-center justify-between px-6 py-4 ${
+            location.pathname === "/" ? 'mt-10' : ''
+          }`}>
+            <Link 
+              to="/" 
+              className="text-2xl font-bold"
+              onClick={handleLinkClick}
+            >
+              BM<span className="text-accent">Crafts</span>
+            </Link>
+          </div>
+          
+          {/* Mobile Menu Links */}
+          <div className="flex-1 overflow-y-auto px-6 py-8">
+            <nav className="flex flex-col space-y-4">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   to={link.href}
-                  className={cn(
-                    "w-full max-w-md text-center text-lg font-medium py-4 px-4 rounded-md transition-colors",
+                  className={`text-lg font-medium py-3 px-4 rounded-lg transition-colors ${
                     isActive(link.href) 
-                      ? "bg-accent/10 text-accent font-semibold" 
-                      : "text-foreground hover:text-accent hover:bg-accent/5"
-                  )}
+                      ? 'bg-accent/10 text-accent' 
+                      : 'hover:bg-accent/5 hover:text-accent'
+                  }`}
                   onClick={handleLinkClick}
                 >
                   {link.name}
                 </Link>
               ))}
               
-              {/* External Blog Link (Mobile) */}
+              {/* External Blog Link */}
               <a
                 href={externalBlogUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full max-w-md text-center text-lg font-medium py-4 px-4 rounded-md transition-colors text-foreground hover:text-accent hover:bg-accent/5"
+                className="text-lg font-medium py-3 px-4 rounded-lg transition-colors hover:bg-accent/5 hover:text-accent"
+                onClick={() => setMobileNavOpen(false)}
               >
                 Blog
               </a>
             </nav>
-            
-            <div className="flex flex-col items-center mt-auto pt-6">
-              <Link
-                to="/contact"
-                className="w-full max-w-md text-center px-6 py-3.5 rounded-full text-base font-medium bg-accent text-white hover:bg-accent/90 transition-colors"
-                onClick={handleLinkClick}
-              >
-                Get Free Consultation
-              </Link>
-            </div>
+          </div>
+          
+          {/* Mobile Menu Footer */}
+          <div className="p-6 border-t border-border">
+            <Link
+              to="/contact"
+              className="block w-full py-3 px-4 bg-accent text-white text-center rounded-lg font-medium shadow-sm hover:bg-accent/90 transition-colors"
+              onClick={handleLinkClick}
+            >
+              Get Free Consultation
+            </Link>
           </div>
         </div>
+      </div>
+      
+      {/* Overlay for mobile menu */}
+      {mobileNavOpen && (
+        <div 
+          className="fixed inset-0 bg-black/20 backdrop-blur-sm z-30 md:hidden"
+          onClick={() => setMobileNavOpen(false)}
+          aria-hidden="true"
+        />
       )}
     </>
   );
