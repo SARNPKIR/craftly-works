@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { X } from 'lucide-react';
 import { Button } from './button';
@@ -16,7 +16,7 @@ const CookieConsent = () => {
       // Show cookie consent after a short delay
       const timer = setTimeout(() => {
         setShowConsent(true);
-      }, 1000);
+      }, 2000); // Increased delay to allow critical content to load first
       return () => clearTimeout(timer);
     }
   }, []);
@@ -34,7 +34,7 @@ const CookieConsent = () => {
   if (!showConsent) return null;
 
   return (
-    <div className="fixed bottom-0 inset-x-0 z-50">
+    <div className="fixed bottom-0 inset-x-0 z-50 will-change-transform">
       {isMobile ? (
         // Mobile cookie consent
         <div className="bg-[#1A1F2C] text-white p-4 border-t border-gray-700">
@@ -116,4 +116,5 @@ const CookieConsent = () => {
   );
 };
 
-export default CookieConsent;
+// Export as default but wrap with React.memo to prevent unnecessary re-renders
+export default React.memo(CookieConsent);

@@ -9,6 +9,16 @@
     <meta name="description" content="BMCrafts delivers custom web development solutions for businesses in the UK. Specializing in e-commerce, healthcare, real estate and educational websites.">
     <meta name="keywords" content="web development UK, app development, e-commerce website, healthcare websites, real estate websites, SaaS development, educational websites">
     
+    <!-- Preload critical assets -->
+    <link rel="preload" href="/src/index.css" as="style">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Defer non-critical fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;700&display=swap" media="print" onload="this.media='all'">
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;700&display=swap">
+    </noscript>
+    
     <!-- Open Graph / Social Media Meta Tags -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://bmcrafts.co.uk/">
@@ -70,6 +80,7 @@
     <div id="root"></div>
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
-    <script src="//code.tidio.co/l3c0nxlasossy59v6eqw87afs9tk919b.js" async></script>
+    <!-- Defer non-critical third-party script -->
+    <script src="//code.tidio.co/l3c0nxlasossy59v6eqw87afs9tk919b.js" async defer></script>
   </body>
-</html> 
+</html>

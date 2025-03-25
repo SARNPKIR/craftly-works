@@ -1,11 +1,17 @@
+
 import { ArrowRight } from 'lucide-react';
-import AnimatedGradient from '../ui/AnimatedGradient';
 import { Link } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
+
+// Lazy load the AnimatedGradient component
+const AnimatedGradient = lazy(() => import('../ui/AnimatedGradient'));
 
 const Hero = () => {
   return (
     <section id="home" className="relative min-h-screen flex items-center pb-20 pt-32 overflow-hidden">
-      <AnimatedGradient className="absolute inset-0 -z-10" />
+      <Suspense fallback={<div className="absolute inset-0 bg-gradient-to-b from-purple-100 to-blue-50 -z-10"></div>}>
+        <AnimatedGradient className="absolute inset-0 -z-10" />
+      </Suspense>
       
       {/* Main Content */}
       <div className="container mx-auto px-6 relative z-10">
@@ -65,14 +71,16 @@ const Hero = () => {
             className="w-full lg:w-1/2 perspective-container animate-fade-in opacity-0"
             style={{ animationDelay: '1s', animationFillMode: 'forwards' }}
           >
-            <div 
-              className="relative mx-auto max-w-lg"
-            >
+            <div className="relative mx-auto max-w-lg">
               <div className="glass-card rounded-2xl overflow-hidden shadow-xl p-1.5 transition-all duration-500 animate-float">
+                {/* Optimized image with explicit width and height */}
                 <img 
-                  src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80&w=1600" 
+                  src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80&w=800&h=534" 
                   alt="Web Development" 
                   className="w-full h-auto rounded-xl object-cover"
+                  width="800"
+                  height="534"
+                  loading="lazy"
                 />
               </div>
               
@@ -92,9 +100,9 @@ const Hero = () => {
         </div>
       </div>
       
-      {/* Decorative elements */}
-      <div className="absolute top-1/4 left-0 w-64 h-64 bg-blue-300/10 rounded-full blur-3xl -z-10" />
-      <div className="absolute bottom-1/3 right-0 w-80 h-80 bg-purple-300/10 rounded-full blur-3xl -z-10" />
+      {/* Decorative elements - optimized to use transform instead of top/left positioning */}
+      <div className="fixed top-1/4 left-0 w-64 h-64 bg-blue-300/10 rounded-full blur-3xl -z-10 transform translate-x-0 translate-y-0" />
+      <div className="fixed bottom-1/3 right-0 w-80 h-80 bg-purple-300/10 rounded-full blur-3xl -z-10 transform translate-x-0 translate-y-0" />
     </section>
   );
 };

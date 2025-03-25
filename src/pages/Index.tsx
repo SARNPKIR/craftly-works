@@ -1,14 +1,23 @@
 
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import Hero from '@/components/sections/Hero';
-import Services from '@/components/sections/Services';
-import WhyChooseUs from '@/components/sections/WhyChooseUs';
-import Testimonials from '@/components/sections/Testimonials';
 import AnnouncementBar from '@/components/ui/AnnouncementBar';
-import CookieConsent from '@/components/ui/CookieConsent';
 import useScrollToTop from '@/hooks/useScrollToTop';
+
+// Lazy load non-critical components
+const Services = lazy(() => import('@/components/sections/Services'));
+const WhyChooseUs = lazy(() => import('@/components/sections/WhyChooseUs'));
+const Testimonials = lazy(() => import('@/components/sections/Testimonials'));
+const CookieConsent = lazy(() => import('@/components/ui/CookieConsent'));
+
+// Loading fallback for lazy-loaded components
+const SectionLoading = () => (
+  <div className="py-20 flex justify-center items-center">
+    <div className="animate-pulse bg-gray-200 rounded-md h-96 w-full max-w-5xl"></div>
+  </div>
+);
 
 const Index = () => {
   // Use the scroll to top hook
@@ -56,13 +65,28 @@ const Index = () => {
       <AnnouncementBar />
       <Navbar />
       <main className="flex-grow">
+        {/* Critical content - loaded immediately */}
         <Hero />
-        <Services />
-        <WhyChooseUs />
-        <Testimonials />
+        
+        {/* Non-critical content - lazy loaded */}
+        <Suspense fallback={<SectionLoading />}>
+          <Services />
+        </Suspense>
+        
+        <Suspense fallback={<SectionLoading />}>
+          <WhyChooseUs />
+        </Suspense>
+        
+        <Suspense fallback={<SectionLoading />}>
+          <Testimonials />
+        </Suspense>
       </main>
       <Footer />
-      <CookieConsent />
+      
+      {/* Defer cookie consent loading */}
+      <Suspense fallback={null}>
+        <CookieConsent />
+      </Suspense>
     </div>
   );
 };
