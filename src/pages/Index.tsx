@@ -7,6 +7,7 @@ import Services from '@/components/sections/Services';
 import WhyChooseUs from '@/components/sections/WhyChooseUs';
 import Testimonials from '@/components/sections/Testimonials';
 import AnnouncementBar from '@/components/ui/AnnouncementBar';
+import CookieConsent from '@/components/ui/CookieConsent';
 import useScrollToTop from '@/hooks/useScrollToTop';
 
 const Index = () => {
@@ -61,6 +62,7 @@ const Index = () => {
         <Testimonials />
       </main>
       <Footer />
+      <CookieConsent />
     </div>
   );
 };

@@ -268,3 +268,18 @@ section:first-of-type {
 .page-wrapper > footer {
   padding-bottom: calc(var(--cookie-banner-height, 0) + 1rem);
 }
+
+/* Mobile cookie consent styles */
+@media (max-width: 640px) {
+  .cookie-consent-mobile {
+    max-width: 100%;
+    padding: 1rem;
+  }
+  
+  .cookie-consent-mobile .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+  }
+}
