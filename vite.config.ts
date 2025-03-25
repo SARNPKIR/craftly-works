@@ -24,9 +24,33 @@ export default defineConfig(({ mode }) => ({
     exclude: ['nodemailer']
   },
   build: {
+    // Optimize output
+    minify: 'terser',
+    cssCodeSplit: true,
+    chunkSizeWarningLimit: 500,
     rollupOptions: {
       // Externalize deps that shouldn't be bundled
-      external: ['nodemailer']
-    }
+      external: ['nodemailer'],
+      output: {
+        // Optimize chunks
+        manualChunks: {
+          'vendor': ['react', 'react-dom', 'react-router-dom'],
+          'ui': [
+            '@radix-ui/react-accordion',
+            '@radix-ui/react-dialog',
+            '@radix-ui/react-dropdown-menu',
+            '@radix-ui/react-tooltip',
+            'lucide-react'
+          ]
+        }
+      }
+    },
+    // Tree shaking and dead code elimination
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
   }
 }));

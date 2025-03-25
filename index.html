@@ -7,6 +7,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Web Development Agency</title>
     <meta name="description" content="Professional web development services for businesses of all sizes. Fast, responsive websites and applications that drive results." />
+    
+    <!-- Critical CSS inline -->
+    <style>
+      :root {
+        --background: 220 33% 98%;
+        --foreground: 222 22% 15%;
+        --card: 0 0% 100%;
+        --card-foreground: 222 22% 15%;
+        --accent: 250 95% 65%;
+      }
+      body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background-color: hsl(var(--background));
+        color: hsl(var(--foreground));
+      }
+      #root {
+        display: flex;
+        flex-direction: column;
+        min-height: 100%;
+      }
+      .page-wrapper {
+        min-height: 100vh;
+      }
+    </style>
+    
+    <!-- Preload critical fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" 
+          rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" 
+            rel="stylesheet">
+    </noscript>
   </head>
   <body>
     <div id="root"></div>

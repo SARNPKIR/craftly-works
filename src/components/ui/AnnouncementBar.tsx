@@ -1,10 +1,19 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { X, Sparkles, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const AnnouncementBar = () => {
   const [isVisible, setIsVisible] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(false);
+  
+  // Set loaded state after component mounts to improve initial render
+  useEffect(() => {
+    // Use requestAnimationFrame to delay this until after the first paint
+    requestAnimationFrame(() => {
+      setIsLoaded(true);
+    });
+  }, []);
 
   if (!isVisible) return null;
 
@@ -12,7 +21,7 @@ const AnnouncementBar = () => {
     <div className="bg-accent text-white relative">
       <div className="container mx-auto py-2.5 px-6 flex items-center justify-center text-center relative">
         <div className="flex items-center gap-1.5">
-          <Sparkles size={16} className="flex-shrink-0 animate-pulse" />
+          <Sparkles size={16} className="flex-shrink-0" />
           <p className="text-sm font-medium">
             <span className="font-bold">Special Offer:</span> 20% off all web packages until June 30th
             <Link to="/pricing" className="underline ml-2 inline-flex items-center whitespace-nowrap hover:text-white/90">
