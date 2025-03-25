@@ -2,6 +2,7 @@
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { lazy, Suspense, useEffect, useState } from 'react';
+import React from 'react';
 
 // Lazy load the AnimatedGradient component
 const AnimatedGradient = lazy(() => import('../ui/AnimatedGradient'));
@@ -82,7 +83,7 @@ const Hero = () => {
             {isMounted && (
               <div className="relative mx-auto max-w-lg">
                 <div className="glass-card rounded-2xl overflow-hidden shadow-xl p-1.5 transition-all duration-500 animate-float">
-                  {/* Optimized image with explicit width and height and smaller image size */}
+                  {/* Fixed the fetchpriority attribute to use camelCase fetchPriority */}
                   <img 
                     src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=60&w=600&h=400" 
                     alt="Web Development" 
@@ -90,7 +91,7 @@ const Hero = () => {
                     width="600"
                     height="400"
                     loading="eager"
-                    fetchpriority="high"
+                    fetchPriority="high"
                   />
                 </div>
                 
