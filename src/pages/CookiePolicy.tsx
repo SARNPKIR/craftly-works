@@ -149,4 +149,4 @@ const CookiePolicy = () => {
   );
 };
 
-export default CookiePolicy; 
+export default CookiePolicy;
