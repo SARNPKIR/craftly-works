@@ -83,7 +83,6 @@ const Hero = () => {
             {isMounted && (
               <div className="relative mx-auto max-w-lg">
                 <div className="glass-card rounded-2xl overflow-hidden shadow-xl p-1.5 transition-all duration-500 animate-float">
-                  {/* Fixed the fetchpriority attribute to use camelCase fetchPriority */}
                   <img 
                     src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=60&w=600&h=400" 
                     alt="Web Development" 
@@ -111,8 +110,6 @@ const Hero = () => {
           </div>
         </div>
       </div>
-      
-      {/* Removed decorative elements to improve performance */}
     </section>
   );
 };
