@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -8,48 +8,64 @@ const testimonials = [
     id: 1,
     name: 'Sarah Johnson',
     role: 'CEO, FashionStyle E-commerce',
-    content: 'BMCrafts transformed our online store, resulting in a 40% increase in sales within just three months. Their attention to detail and focus on user experience made all the difference.',
-    image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200&q=80',
+    content: 'BMCrafts transformed our online store, resulting in a 40% increase in sales within just three months.',
+    image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100&q=60',
     rating: 5,
   },
   {
     id: 2,
     name: 'Dr. Michael Chen',
     role: 'Director, HealthFirst Clinic',
-    content: 'Working with BMCrafts on our healthcare website was a seamless experience. They understood the unique requirements of our industry and delivered a HIPAA-compliant solution that has streamlined our patient communication.',
-    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200&q=80',
+    content: 'Working with BMCrafts on our healthcare website was a seamless experience. They understood the unique requirements of our industry.',
+    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100&q=60',
     rating: 5,
   },
   {
     id: 3,
     name: 'Amanda Reynolds',
     role: 'Marketing Director, Homes & Properties',
-    content: 'Our real estate website by BMCrafts has become our best sales tool. The virtual tours and property listings have helped us close deals faster and provide better service to our clients.',
-    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200&q=80',
+    content: 'Our real estate website by BMCrafts has become our best sales tool. The virtual tours and property listings have helped us close deals faster.',
+    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100&q=60',
     rating: 5,
   },
   {
     id: 4,
     name: 'Robert Blackwell',
     role: 'Partner, Blackwell Law Firm',
-    content: 'As a law firm, we needed a website that conveyed professionalism and trust. BMCrafts delivered exactly that, with a clean design and intuitive navigation that has helped us generate quality leads.',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200&q=80',
+    content: 'As a law firm, we needed a website that conveyed professionalism and trust. BMCrafts delivered exactly that, with a clean design and intuitive navigation.',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100&q=60',
     rating: 5,
   },
   {
     id: 5,
     name: 'Lisa Montgomery',
     role: 'Executive Director, GreenEarth Foundation',
-    content: 'Our non-profit needed a website that would inspire action and facilitate donations. BMCrafts created a solution that has dramatically increased our online donations and volunteer sign-ups.',
-    image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200&q=80',
+    content: 'Our non-profit needed a website that would inspire action and facilitate donations. BMCrafts created a solution that has dramatically increased our online donations.',
+    image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100&q=60',
     rating: 5,
   },
 ];
 
+// Lazy load SVG images
+const BrandLogos = lazy(() => import('./BrandLogos'));
+
 const Testimonials = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    setIsMounted(true);
+    
+    intervalRef.current = setInterval(() => {
+      handleNext();
+    }, 8000);
+
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [activeIndex]);
 
   const handlePrev = () => {
     if (isAnimating) return;
@@ -65,16 +81,6 @@ const Testimonials = () => {
     setTimeout(() => setIsAnimating(false), 500);
   };
 
-  useEffect(() => {
-    intervalRef.current = setInterval(() => {
-      handleNext();
-    }, 8000);
-
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
-  }, [activeIndex]);
-
   const resetInterval = () => {
     if (intervalRef.current) clearInterval(intervalRef.current);
     intervalRef.current = setInterval(() => {
@@ -83,13 +89,13 @@ const Testimonials = () => {
   };
 
   return (
-    <section id="work" className="py-24 bg-white relative overflow-hidden">
+    <section id="work" className="py-16 bg-white relative overflow-hidden">
       <div className="container mx-auto px-6">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="bg-accent/10 text-accent px-4 py-1.5 rounded-full text-sm font-medium mb-6 inline-block">
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <span className="bg-accent/10 text-accent px-4 py-1.5 rounded-full text-sm font-medium mb-4 inline-block">
             Client Stories
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
             What Our Clients Say
           </h2>
           <p className="text-lg text-gray-600">
@@ -106,9 +112,9 @@ const Testimonials = () => {
               {testimonials.map((testimonial) => (
                 <div 
                   key={testimonial.id} 
-                  className="w-full flex-shrink-0 p-6 md:p-10 glass-card rounded-2xl"
+                  className="w-full flex-shrink-0 p-6 md:p-8 glass-card rounded-2xl"
                 >
-                  <div className="mb-8">
+                  <div className="mb-6">
                     <div className="flex space-x-1">
                       {[...Array(5)].map((_, i) => (
                         <svg 
@@ -120,6 +126,8 @@ const Testimonials = () => {
                           )} 
                           viewBox="0 0 20 20" 
                           fill="currentColor"
+                          width="20"
+                          height="20"
                         >
                           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                         </svg>
@@ -127,16 +135,21 @@ const Testimonials = () => {
                     </div>
                   </div>
                   
-                  <p className="text-lg text-gray-700 mb-8 italic">
+                  <p className="text-lg text-gray-700 mb-6 italic">
                     "{testimonial.content}"
                   </p>
                   
                   <div className="flex items-center">
-                    <img 
-                      src={testimonial.image} 
-                      alt={testimonial.name}
-                      className="w-12 h-12 rounded-full object-cover mr-4 border-2 border-white shadow-md"
-                    />
+                    {isMounted && (
+                      <img 
+                        src={testimonial.image} 
+                        alt={testimonial.name}
+                        className="w-12 h-12 rounded-full object-cover mr-4 border-2 border-white shadow-md"
+                        width="48"
+                        height="48"
+                        loading="lazy"
+                      />
+                    )}
                     <div>
                       <h4 className="font-bold text-lg">{testimonial.name}</h4>
                       <p className="text-gray-600">{testimonial.role}</p>
@@ -147,7 +160,7 @@ const Testimonials = () => {
             </div>
           </div>
 
-          <div className="flex justify-center mt-8 space-x-2">
+          <div className="flex justify-center mt-6 space-x-2">
             {testimonials.map((_, index) => (
               <button
                 key={index}
@@ -187,25 +200,16 @@ const Testimonials = () => {
           </button>
         </div>
 
-        <div className="mt-20">
-          <div className="text-center mb-12">
-            <h3 className="text-2xl font-bold mb-6">Trusted by Innovative Brands</h3>
+        <div className="mt-16">
+          <div className="text-center mb-8">
+            <h3 className="text-2xl font-bold mb-4">Trusted by Innovative Brands</h3>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 justify-items-center items-center">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/1/1e/Google_logo.svg" alt="Google" className="h-6 object-contain opacity-60 hover:opacity-100 transition-opacity" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e6/Amazon_logo.svg" alt="Amazon" className="h-6 object-contain opacity-60 hover:opacity-100 transition-opacity" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Microsoft_logo.svg" alt="Microsoft" className="h-5 object-contain opacity-60 hover:opacity-100 transition-opacity" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="IBM" className="h-5 object-contain opacity-60 hover:opacity-100 transition-opacity" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/1/13/Starbucks_Corporation_Logo_2011.svg" alt="Starbucks" className="h-6 object-contain opacity-60 hover:opacity-100 transition-opacity" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" className="h-6 object-contain opacity-60 hover:opacity-100 transition-opacity" />
-          </div>
+          <Suspense fallback={<div className="h-16"></div>}>
+            {isMounted && <BrandLogos />}
+          </Suspense>
         </div>
       </div>
-      
-      {/* Decorative elements */}
-      <div className="absolute top-1/3 left-0 w-64 h-64 bg-blue-300/10 rounded-full blur-3xl -z-10" />
-      <div className="absolute bottom-1/3 right-0 w-80 h-80 bg-purple-300/10 rounded-full blur-3xl -z-10" />
     </section>
   );
 };

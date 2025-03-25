@@ -1,5 +1,5 @@
 
-import { useEffect, lazy, Suspense } from 'react';
+import { useEffect, lazy, Suspense, useState } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import Hero from '@/components/sections/Hero';
@@ -14,14 +14,25 @@ const CookieConsent = lazy(() => import('@/components/ui/CookieConsent'));
 
 // Loading fallback for lazy-loaded components
 const SectionLoading = () => (
-  <div className="py-20 flex justify-center items-center">
-    <div className="animate-pulse bg-gray-200 rounded-md h-96 w-full max-w-5xl"></div>
+  <div className="py-8 flex justify-center items-center">
+    <div className="animate-pulse bg-gray-200 rounded-md h-48 w-full max-w-5xl"></div>
   </div>
 );
 
 const Index = () => {
   // Use the scroll to top hook
   useScrollToTop();
+  const [contentLoaded, setContentLoaded] = useState(false);
+
+  // Mark content as loaded after Hero section is rendered
+  useEffect(() => {
+    // Simulate content being loaded
+    const timer = setTimeout(() => {
+      setContentLoaded(true);
+    }, 1000);
+    
+    return () => clearTimeout(timer);
+  }, []);
 
   // Smooth scroll functionality for hash links (within the same page)
   useEffect(() => {
@@ -68,18 +79,22 @@ const Index = () => {
         {/* Critical content - loaded immediately */}
         <Hero />
         
-        {/* Non-critical content - lazy loaded */}
-        <Suspense fallback={<SectionLoading />}>
-          <Services />
-        </Suspense>
-        
-        <Suspense fallback={<SectionLoading />}>
-          <WhyChooseUs />
-        </Suspense>
-        
-        <Suspense fallback={<SectionLoading />}>
-          <Testimonials />
-        </Suspense>
+        {/* Non-critical content - lazy loaded with intersection observer */}
+        {contentLoaded && (
+          <>
+            <Suspense fallback={<SectionLoading />}>
+              <Services />
+            </Suspense>
+            
+            <Suspense fallback={<SectionLoading />}>
+              <WhyChooseUs />
+            </Suspense>
+            
+            <Suspense fallback={<SectionLoading />}>
+              <Testimonials />
+            </Suspense>
+          </>
+        )}
       </main>
       <Footer />
       

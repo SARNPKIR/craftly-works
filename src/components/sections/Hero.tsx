@@ -1,12 +1,20 @@
 
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 
 // Lazy load the AnimatedGradient component
 const AnimatedGradient = lazy(() => import('../ui/AnimatedGradient'));
 
 const Hero = () => {
+  // State to track if the component is mounted
+  const [isMounted, setIsMounted] = useState(false);
+  
+  // Set mounted state after component mounts
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   return (
     <section id="home" className="relative min-h-screen flex items-center pb-20 pt-32 overflow-hidden">
       <Suspense fallback={<div className="absolute inset-0 bg-gradient-to-b from-purple-100 to-blue-50 -z-10"></div>}>
@@ -71,38 +79,39 @@ const Hero = () => {
             className="w-full lg:w-1/2 perspective-container animate-fade-in opacity-0"
             style={{ animationDelay: '1s', animationFillMode: 'forwards' }}
           >
-            <div className="relative mx-auto max-w-lg">
-              <div className="glass-card rounded-2xl overflow-hidden shadow-xl p-1.5 transition-all duration-500 animate-float">
-                {/* Optimized image with explicit width and height */}
-                <img 
-                  src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80&w=800&h=534" 
-                  alt="Web Development" 
-                  className="w-full h-auto rounded-xl object-cover"
-                  width="800"
-                  height="534"
-                  loading="lazy"
-                />
+            {isMounted && (
+              <div className="relative mx-auto max-w-lg">
+                <div className="glass-card rounded-2xl overflow-hidden shadow-xl p-1.5 transition-all duration-500 animate-float">
+                  {/* Optimized image with explicit width and height and smaller image size */}
+                  <img 
+                    src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=60&w=600&h=400" 
+                    alt="Web Development" 
+                    className="w-full h-auto rounded-xl object-cover"
+                    width="600"
+                    height="400"
+                    loading="eager"
+                    fetchpriority="high"
+                  />
+                </div>
+                
+                <div className="absolute -bottom-6 -right-6 glass-card rounded-xl p-4 shadow-lg bg-white/90 backdrop-blur-sm border border-white">
+                  <p className="text-sm font-medium text-gray-900">Conversion rate</p>
+                  <p className="text-2xl font-bold text-accent">+40%</p>
+                  <p className="text-xs text-gray-500">after redesign</p>
+                </div>
+                
+                <div className="absolute -top-6 -left-6 glass-card rounded-xl p-4 shadow-lg bg-white/90 backdrop-blur-sm border border-white">
+                  <p className="text-sm font-medium text-gray-900">Load time</p>
+                  <p className="text-2xl font-bold text-accent">0.8s</p>
+                  <p className="text-xs text-gray-500">performance boost</p>
+                </div>
               </div>
-              
-              <div className="absolute -bottom-6 -right-6 glass-card rounded-xl p-4 shadow-lg bg-white/90 backdrop-blur-sm animate-pulse-subtle border border-white">
-                <p className="text-sm font-medium text-gray-900">Conversion rate</p>
-                <p className="text-2xl font-bold text-accent">+40%</p>
-                <p className="text-xs text-gray-500">after redesign</p>
-              </div>
-              
-              <div className="absolute -top-6 -left-6 glass-card rounded-xl p-4 shadow-lg bg-white/90 backdrop-blur-sm animate-pulse-subtle border border-white" style={{ animationDelay: '1.5s' }}>
-                <p className="text-sm font-medium text-gray-900">Load time</p>
-                <p className="text-2xl font-bold text-accent">0.8s</p>
-                <p className="text-xs text-gray-500">performance boost</p>
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
       
-      {/* Decorative elements - optimized to use transform instead of top/left positioning */}
-      <div className="fixed top-1/4 left-0 w-64 h-64 bg-blue-300/10 rounded-full blur-3xl -z-10 transform translate-x-0 translate-y-0" />
-      <div className="fixed bottom-1/3 right-0 w-80 h-80 bg-purple-300/10 rounded-full blur-3xl -z-10 transform translate-x-0 translate-y-0" />
+      {/* Removed decorative elements to improve performance */}
     </section>
   );
 };
